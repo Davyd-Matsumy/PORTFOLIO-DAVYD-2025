@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Davyd Matsumy | Portfólio Futurista</title>
+
+<!-- Fonte retrô/pixelada -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+<style>
+/* ===== Estilos Gerais ===== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive; /* fonte retrô/pixelada */
+    overflow-x: hidden;
+    color: #b3f4f1;
+    transition: background-color 3s ease-in-out;
+    background-color: #000000;
+    animation: fundoPulse 5s infinite alternate;
+}
+
+@keyframes fundoPulse {
+    0% { background-color: #000000; }
+    50% { background-color: #0a0a0a; }
+    100% { background-color: #000000; }
+}
+
+canvas#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ===== Header ===== */
+header.header {
+    position: relative;
+    z-index: 2;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    padding: 10px 20px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    height: 50px;
+}
+
+nav.menu-desktop ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav.menu-desktop ul li a {
+    text-decoration: none;
+    color: #00fff7;
+    transition: all 0.3s;
+    text-shadow: 0 0 5px #00fff7;
+    animation: linkPulse 2s infinite alternate;
+}
+
+nav.menu-desktop ul li a:hover {
+    color: #000000;
+    text-shadow: 0 0 15px #000000, 0 0 25px #00fff7, 0 0 35px #14ebff;
+}
+
+/* Pulsação neon links */
+@keyframes linkPulse {
+    0% { text-shadow: 0 0 5px #00fff7; }
+    50% { text-shadow: 0 0 15px #00fff7, 0 0 25px #1f0233; }
+    100% { text-shadow: 0 0 5px #00fff7; }
+}
+
+/* ===== Áreas de conhecimento ===== */
+.areas-conhecimento {
+    padding: 50px 20px;
+}
+
+.areas-conhecimento h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00fff7;
+    text-shadow: 0 0 5px #00fff7, 0 0 15px #ff00ff;
+    animation: areaTitlePulse 2s infinite alternate;
+}
+
+.lista-conhecimento {
+    max-width: 600px;
+    margin: auto;
+    list-style: none;
+    padding: 0;
+}
+
+.lista-conhecimento li {
+    margin: 10px 0;
+    font-size: 14px;
+    text-shadow: 0 0 3px #00fff7;
+    animation: areaItemPulse 2s infinite alternate;
+}
+
+/* Pulsação neon áreas */
+@keyframes areaTitlePulse {
+    0% { text-shadow: 0 0 5px #00fff7, 0 0 10px #ff00ff; }
+    50% { text-shadow: 0 0 15px #00fff7, 0 0 25px #ff00ff; }
+    100% { text-shadow: 0 0 5px #00fff7, 0 0 10px #ff00ff; }
+}
+
+@keyframes areaItemPulse {
+    0% { text-shadow: 0 0 2px #00fff7; }
+    50% { text-shadow: 0 0 5px #00fff7, 0 0 10px #ff00ff; }
+    100% { text-shadow: 0 0 2px #00fff7; }
+}
+
+/* ===== Hero ===== */
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 30px 20px;
+}
+
+.hero-text {
+    flex: 1 1 400px;
+    margin-right: 20px;
+}
+
+.hero-text h1 {
+    font-size: 22px;
+    color: #00fff7;
+    text-shadow: 0 0 10px #00fff7, 0 0 20px #ff00ff, 0 0 30px #14ebff;
+}
+
+.hero-text p {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #b3f4f1;
+}
+
+.hero-image img {
+    max-width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #00fff7, 0 0 40px #ff00ff;
+}
+
+/* ===== Footer ===== */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    color: #b3f4f1;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: #00fff7;
+    font-size: 12px;
+    text-shadow: 0 0 3px #00fff7;
+    animation: footerLinkPulse 2s infinite alternate;
+}
+
+.footer-links a img {
+    width: 20px;
+    height: 20px;
+}
+
+@keyframes footerLinkPulse {
+    0% { text-shadow: 0 0 3px #00fff7; }
+    50% { text-shadow: 0 0 8px #00fff7, 0 0 15px #ff00ff; }
+    100% { text-shadow: 0 0 3px #00fff7; }
+}
+
+/* ===== Neon digitando ===== */
+.neon-text {
+    color: #00fff7;
+    text-shadow: 0 0 5px #00fff7, 0 0 15px #00fff7, 0 0 20px #14ebff;
+}
+</style>
+</head>
+<body>
+
+<canvas id="matrixCanvas"></canvas>
+
+<header class="header">
+    <div class="header-container">
+        <div class="logo">
+            <img src="igm/LOGO MARCA .png" alt="Logotipo pessoal de Davyd Matsumy" />
+        </div>
+        <nav class="menu-desktop">
+            <ul>
+                <li><a href="Identificação Pessoal.html">Identificação Pessoal</a></li>
+                <li><a href="PPE.html">Plano Pessoal de Estudo</a></li>
+                <li><a href="Projeto de Vida.html">Projeto de Vida</a></li>
+                <li><a href="História de Vida.html">História de Vida</a></li>
+                <li><a href="Atividades.html">Atividades</a></li>
+                <li><a href="Currículo.html">Currículo</a></li>
+                <li><a href="Considerações-Finais.html">Conclusão</a></li>
+                <li><a href="Referências.html">Referências</a></li>
+                <li><a href="Anexos.html">Anexos</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="areas-conhecimento">
+        <h2>Áreas de Conhecimento</h2>
+        <ul class="lista-conhecimento">
+            <li><strong>Linguagens:</strong> Kercia, Cláudia</li>
+            <li><strong>Humanas:</strong> Bruno, Ileana</li>
+            <li><strong>Natureza:</strong> Neiliane, Wallace</li>
+            <li><strong>Matemática:</strong> Regiane, Irisneide</li>
+        </ul>
+    </section>
+
+    <section class="hero-content">
+        <div class="hero-text">
+            <h1 id="digitando" class="neon-text"></h1>
+            <p>Explore meus projetos, planos e conquistas.</p>
+        </div>
+        <div class="hero-image">
+            <img src="igm/minha foto.png" alt="Retrato de Davyd Matsumy" />
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-links">
+        <a href="https://youtu.be/LZJ6QGSpVSk?si=70sly5rQI2BRaqkA" target="_blank">
+            <img src="igm/baixados.jpg" alt="Link para YouTube" /> YouTube
+        </a>
+        <a href="https://www.instagram.com/davydmatsumy/?next=%2F" target="_blank">
+            <img src="igm/Instagram Personalizado.jpg" alt="Link para Instagram" /> Instagram
+        </a>
+        <a href="https://www.canva.com/" target="_blank">
+            <img src="igm/Canva icon (1).jpg" alt="Link para Canva" /> Canva
+        </a>
+        <a href="https://github.com/" target="_blank">
+            <img src="igm/GIT  HUB icon _ github logo png.jpg" alt="Link para GitHub" /> Github
+        </a>
+        <a href="https://www.tiktok.com/@kin_arts2" target="_blank">
+            <img src="igm/Peaceful Black • Tiktok.jpg" alt="Link para TikTok" /> Tiktok
+        </a>
+    </div>
+    <p>© 2025 Meu Portfólio. Todos os direitos reservados.<br />
+        Desenvolvido por <strong>Davyd Matsumy</strong>
+    </p>
+</footer>
+
+<script>
+    // Efeito de digitação com som
+    const texto = "Bem-vindo ao meu portfólio!";
+    const destino = document.getElementById("digitando");
+    let i = 0;
+    const somDigito = new Audio("https://www.myinstants.com/media/sounds/key.wav");
+
+    function digitar() {
+        if (i < texto.length) {
+            destino.innerHTML += texto.charAt(i);
+            somDigito.currentTime = 0;
+            somDigito.play().catch(() => {});
+            i++;
+            setTimeout(digitar, 100);
+        } else {
+            destino.classList.add("digitado");
+        }
+    }
+    window.addEventListener("load", () => setTimeout(digitar, 1000));
+
+    // ===== MATRIX DIGITAL RAIN =====
+    const matrixCanvas = document.getElementById('matrixCanvas');
+    const matrixCtx = matrixCanvas.getContext('2d');
+    const font_size = 16;
+    let columns = matrixCanvas.width / font_size;
+    const drops = [];
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:",./<>?`~';
+    const matrixColors = [
+        'rgba(0,255,247,0.7)',
+        'rgba(123,0,255,0.7)',
+        'rgba(20,235,255,0.7)',
+        'rgba(0,255,213,0.7)',
+        'rgba(255,0,255,0.7)'
+    ];
+
+    function resizeMatrixCanvas() {
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+        columns = matrixCanvas.width / font_size;
+        drops.length = 0;
+        for (let x = 0; x < columns; x++) drops[x] = 1;
+    }
+
+    function drawMatrix() {
+        matrixCtx.fillStyle = 'rgba(0,0,0,0.05)';
+        matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+        matrixCtx.font = font_size + 'px monospace';
+
+        for (let j = 0; j < drops.length; j++) {
+            const text = characters.charAt(Math.floor(Math.random() * characters.length));
+            matrixCtx.fillStyle = matrixColors[j % matrixColors.length];
+            matrixCtx.fillText(text, j * font_size, drops[j] * font_size);
+            if (drops[j] * font_size > matrixCanvas.height && Math.random() > 0.975) drops[j] = 0;
+            drops[j]++;
+        }
+        requestAnimationFrame(drawMatrix);
+    }
+
+    resizeMatrixCanvas();
+    drawMatrix();
+    window.addEventListener('resize', resizeMatrixCanvas);
+</script>
+
+</body>
+</html>

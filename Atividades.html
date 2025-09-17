@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Áreas do Conhecimento - Atividades (Retro Pixel)</title>
+<!-- Fonte retrô pixelada (Google Fonts) -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET ===== */
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Press Start 2P', 'Segoe UI', Arial, sans-serif; /* fonte pixelada aplicada por padrão */
+  background:#001f3f;
+  color: #f4f7fa;
+  overflow-x:hidden;
+  position: relative;
+  -webkit-font-smoothing: none; /* deixa aparência mais 'pixel' em alguns navegadores */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== PARTICULAS ===== */
+#particles { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+
+/* ===== HEADER ===== */
+header {
+  background:#002147;
+  padding:25px;
+  text-align:center;
+  color:#a5c9ff;
+  box-shadow:0 4px 20px rgba(0,0,0,0.6);
+  position:sticky;
+  top:0;
+  z-index:1000;
+  border-bottom:2px solid #3399ff55;
+}
+header h1 {
+  font-size:1.6rem; /* Press Start é grande em tamanhos maiores, então diminuir um pouco */
+  letter-spacing:2px;
+  color:#9fd1ff;
+  /* Efeito pixel glow usando várias camadas de text-shadow */
+  text-shadow:
+    0 0 0.6px #3399ff,
+    0 0 6px #3399ff,
+    0 0 12px #66a3ff,
+    0 0 20px #002b59;
+  animation:neonPulse 2s infinite alternate;
+  transition: transform 0.35s ease, color 0.35s ease;
+}
+header h1:hover { transform: translateY(-3px) scale(1.02); color:#fff; }
+
+/* ===== MENU LATERAL ===== */
+#menu-lateral {
+  position:fixed;
+  top:50%;
+  left:10px;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  z-index:1000;
+}
+#menu-lateral a {
+  background:rgba(51,153,255,0.18);
+  color:#e6f4ff;
+  padding:12px 14px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:all 0.25s ease;
+  display:inline-block;
+  font-size:10px; /* ajustar por causa da fonte pixel */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  border:1px solid rgba(255,255,255,0.03);
+}
+#menu-lateral a:hover { background:#3399ff; transform:scale(1.06) translateX(3px); box-shadow:0 6px 18px rgba(51,153,255,0.25); }
+
+/* ===== SEÇÕES ===== */
+section.area {
+  background: rgba(255,255,255,0.04);
+  max-width:1300px;
+  margin:50px auto;
+  padding:30px;
+  border-radius:12px;
+  box-shadow:0 6px 25px rgba(0,0,0,0.4);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease;
+  opacity:0;
+  transform: translateY(30px);
+}
+section.area.visible { opacity:1; transform:translateY(0); }
+section.area:hover { transform: scale(1.01); box-shadow:0 8px 30px rgba(0,128,255,0.6); }
+section.area h2 {
+  text-align:center;
+  font-size:0.9rem;
+  margin-bottom:20px;
+  color:#66a3ff;
+  text-shadow:0 0 8px #3399ff;
+  padding:8px 12px;
+  border-radius:8px;
+  display:inline-block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+section.area h2:hover { transform: translateY(-4px); box-shadow:0 6px 18px rgba(51,153,255,0.18); }
+
+/* ===== EIXOS ===== */
+.eixo {
+  margin-top:28px;
+  opacity:0;
+  transform:translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.eixo.visible { opacity:1; transform:translateY(0); }
+.eixo h3 {
+  color:#66a3ff;
+  margin-bottom:12px;
+  font-size:0.7rem;
+  border-left:5px solid #3399ff;
+  padding-left:12px;
+  text-shadow:0 0 6px #003366;
+}
+
+/* ===== GALERIA ===== */
+.imagens-eixo {
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  justify-content:center;
+  perspective:800px;
+}
+.imagens-eixo img {
+  width:220px;
+  height:auto;
+  border-radius:10px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.5);
+  transition: transform 0.45s cubic-bezier(.2,.9,.3,1), box-shadow 0.45s, filter 0.45s;
+  cursor:pointer;
+  image-rendering: -webkit-optimize-contrast; /* ajuda a manter um visual mais nítido/pixelado */
+}
+.imagens-eixo img:hover {
+  transform: scale(1.06) rotateY(4deg) rotateX(3deg);
+  box-shadow:0 0 28px #3399ff,0 0 60px #66a3ff;
+  filter: brightness(1.12) saturate(1.05);
+}
+
+/* ===== LIGHTBOX ===== */
+#lightbox {
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.92);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+  flex-direction: column;
+}
+#lightbox img {
+  max-width:90%;
+  max-height:80%;
+  border-radius:12px;
+  box-shadow:0 0 40px #3399ff;
+  margin-bottom:15px;
+}
+#lightbox .controls { display:flex; gap:20px; }
+#lightbox button { background:#3399ff; color:#fff; padding:10px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:bold; transition:all 0.3s; }
+#lightbox button:hover { background:#66a3ff; }
+#lightbox.show { display:flex; }
+
+/* ===== BOTÃO VOLTAR AO TOPO ===== */
+#topBtn {
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  padding:15px 20px;
+  font-size:1rem;
+  border:none;
+  border-radius:50px;
+  background:#3399ff;
+  color:#fff;
+  cursor:pointer;
+  box-shadow:0 4px 15px rgba(0,0,0,0.5);
+  display:none;
+  z-index:1500;
+  transition:all 0.3s;
+}
+#topBtn:hover { background:#66a3ff; transform:scale(1.06); }
+
+/* ===== FOOTER ===== */
+footer {
+  background:#002147;
+  padding:30px 20px;
+  text-align:center;
+  color:#a5c9ff;
+  border-top:2px solid #3399ff55;
+  margin-top:50px;
+}
+footer p { margin-bottom:15px; }
+footer a { color:#66a3ff; font-weight:bold; text-decoration:none; transition:all 0.3s ease; }
+footer a:hover { color:#fff; text-shadow:0 0 8px #66a3ff; transform:scale(1.05); }
+
+/* ===== LINKS EM DESTAQUE APAIXONADOS PELO PIXEL ===== */
+a.pixel-link { font-family: 'Press Start 2P', monospace; font-size:10px; display:inline-block; padding:6px 8px; border-radius:6px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); transition: transform .2s ease, box-shadow .2s ease, background .25s; }
+a.pixel-link:hover { transform:translateY(-3px) scale(1.03); box-shadow:0 8px 20px rgba(51,153,255,0.15); background:rgba(51,153,255,0.12); }
+
+/* ===== RESPONSIVO ===== */
+@media (max-width:768px){ 
+  .imagens-eixo img { width:90%; max-width:300px; } 
+  #menu-lateral { display:none; } 
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes neonPulse { from { text-shadow:0 0 8px #3399ff,0 0 16px #003366; } to { text-shadow:0 0 20px #66a3ff,0 0 40px #3399ff; } }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- MENU LATERAL -->
+<div id="menu-lateral">
+  <a class="pixel-link" href="#linguagens">LINGUAGENS</a>
+  <a class="pixel-link" href="#humanas">HUMANAS</a>
+  <a class="pixel-link" href="#natureza">NATUREZA</a>
+  <a class="pixel-link" href="#matematica">MATEMÁTICA</a>
+  <a class="pixel-link" href="#senai">SENAI</a>
+</div>
+
+<header id="topo">
+  <h1>Áreas do Conhecimento e Atividades</h1>
+</header>
+
+<!-- ===== ÁREAS ===== -->
+
+<section class="area" id="linguagens">
+  <h2>LINGUAGENS</h2>
+  <!-- Eixos conforme HTML anterior -->
+  <div class="eixo"><h3>Eixo 1</h3><div class="imagens-eixo">
+    <img src="igm/linguagens eixo 1 férias (2).png" alt="img">
+    <img src="igm/josé do rego.png" alt="img">
+    <img src="igm/semana da arte moderna.png" alt="img">
+    <img src="igm/linguagens eixo 1 mapa mental 2 geração modernista.png" alt="img">
+    <img src="igm/redação.png" alt="img"></div></div>
+
+  <div class="eixo"><h3>Eixo 2</h3><div class="imagens-eixo">
+    <img src="igm/linguagens eixo 1 apresentação.png" alt="img">
+    <img src="igm/repertórios socioculturais.png" alt="img"></div></div>
+
+  <div class="eixo"><h3>Eixo 3</h3><div class="imagens-eixo">
+    <img src="igm/atividade kercia 3 fase modernista.png" alt="img">
+    <img src="igm/atividade linguagens morte e viva severina.png" alt="img">
+    <img src="igm/Lista-RUTE.png" alt="img"></div></div>
+
+  <div class="eixo"><h3>Eixo 4</h3><div class="imagens-eixo">
+    <img src="igm/linguagens eixo 1 apresentação.png" alt="img">
+    <img src="igm/MODELO PARA ATIVIDADES (2024).png" alt="img"></div></div>
+</section>
+
+<section class="area" id="humanas">
+  <h2>HUMANAS</h2>
+  <div class="eixo"><h3>Eixo 1</h3><div class="imagens-eixo">
+    <img src="igm/MODELO PARA ATIVIDADES (2024).pdf (3).png" alt="img">
+    <img src="igm/humanas eixo 1 fluxos migratórios.png" alt="img">
+    <img src="igm/Captura de tela 2025-05-22 172759.png" alt="img"></div></div>
+
+  <div class="eixo"><h3>Eixo 2</h3><div class="imagens-eixo">
+    <img src="igm/redação humanas.png" alt="img">
+    <img src="igm/humanas eixo 2 mapa.png" alt="img">
+    <img src="igm/ATOS.png" alt="img"></div></div>
+
+  <div class="eixo"><h3>Eixo 3</h3><div class="imagens-eixo">
+    <img src="igm/atividade bruno politica e midia.png" alt="img">
+    <img src="igm/Israel vs Palestina.png" alt="img">
+    <img src="igm/Constituição de 1937.png" alt="img">
+    <img src="igm/COP 30.png"></div></div>
+</section>
+
+<section class="area" id="natureza">
+  <h2>NATUREZA</h2>
+  <div class="eixo"><h3>Eixo 1</h3><div class="imagens-eixo">
+    <img src="igm/RESÍDUOS.png" alt="img">
+    <img src="igm/cadeia carbonica.png" alt="img">
+    <img src="igm/magnetismo.png" alt="img">
+    <img src="igm/motor eletrico.png" alt="img"></div></div>
+
+  <div class="eixo"><h3>Eixo 2</h3><div class="imagens-eixo">
+    <img src="igm/força magnetica.png" alt="img">
+    <img src="igm/onDas.png" alt="img">
+    <img src="igm/funções-Oxigenadas.png" alt="img"></div></div>
+
+  <div class="eixo"><h3>Eixo 3</h3><div class="imagens-eixo">
+    <img src="igm/atividade wallace linha temporal.png" alt="img">
+    <img src="igm/RADIOATIVIDADE (2024).pdf.png" alt="img">
+    <img src="igm/Fusão e fissão nuclear.png" alt="img">
+    <img src=" igm/Lista de questões wallace.png" alt="img"></div></div>
+</section>
+
+<section class="area" id="matematica">
+  <h2>MATEMÁTICA</h2>
+  <div class="eixo"><h3>Eixo 1</h3><div class="imagens-eixo">
+    <img src="igm/grafiCos-estetisticos.png" alt="img">
+    <img src="igm/Estátisticas.png" alt="img">
+    <img src="igm/cartolina matematica.png" alt="img">
+    <img src="igm/grafico.png" alt="img">
+    <img src="igm/tabela matematica.png" alt="img"></div></div>
+
+  <div class="eixo"><h3>Eixo 2</h3><div class="imagens-eixo">
+    <img src="igm/jogosmatematica.png" alt="img">
+    <img src="igm/desenho.png" alt="img"></div></div>
+    <div class="eixo"><h3>Eixo 3</h3><div class="imagens-eixo">
+    <img src="igm/Matemática PROPABILIDADE.png" alt="img">
+    <img src="igm/Probabilidade 01.png" alt="img">
+     <img src="igm/CIRCULO.png" alt="img">
+     <img src="igm/Cópia de Probabilidade 02.png" alt="img"></div></div>
+</section>
+
+<section class="area" id="senai">
+  <h2>SENAI</h2>
+  <div class="eixo"><h3>Eixo 1</h3><div class="imagens-eixo">
+    <img src="igm/ETICA E ORGANIZALÇAO DE DADOS.png" alt="img">
+    <img src="igm/TRABALHO EM EQUIPE.png" alt="img">
+    <img src="igm/Lista de projeto e estruturação de interface web.png" alt="img">
+    <img src="igm/restaurante.png" alt="img">
+    <img src="igm/simbolo senai.png" alt="img">
+    <img src="igm/CLiente-side.png" alt="img">
+    <img src="igm/Criação e editoração de Multimídia.png" alt="img">
+    <img src="igm/Cópia de Projeto e Extruturação de Interface Web_20250319_212501_0000.pdf.png" alt="img"></div></div>
+
+  <div class="eixo"><h3>Eixo 2</h3><div class="imagens-eixo">
+    <img src="igm/portifófio.png" alt="img">
+    <img src="igm/relogio.png" alt="img">
+    <img src="igm/Programação Cliente Side.png" alt="img">
+    <img src="igm/banco de dados.png" alt="img">
+    <img src="igm/atividade cleiton banco de dados.png" alt="img"></div></div>
+
+  <div class="eixo"><h3>Eixo 3</h3><div class="imagens-eixo">
+    <img src="igm/CLEITON lOgin.png" alt="img">
+    <img src="igm/atividade cletion mapa mental portifólio html.png" alt="img">
+    <img src="igm/construindo pontes no ambiente de trabalho.png" alt="img">
+    <img src="igm/apresentação construindo pontes no ambiente de trabalho.png" alt="img">
+   <img src="igm/apresentação construindo pontes no ambiente de trabalho lista.png" alt="img">
+  <img src="igm/apresentação construindo pontes no ambiente de trabalho lista-2.png" alt="img">
+  <img src="igm/Design patterns.png" alt="img"></div></div>
+</section>
+
+<button id="topBtn" title="Voltar ao topo">Topo</button>
+
+<div id="lightbox">
+  <img src="" alt="Preview">
+  <div class="controls">
+    <button id="prev">Anterior</button>
+    <button id="next">Próximo</button>
+    <button id="close">Fechar</button>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 Davyd Matsumy - Todos os direitos reservados | <a href="#topo">Voltar ao topo</a></p>
+</footer>
+
+<script>
+// ===== PARTICULAS =====
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let w = canvas.width = window.innerWidth;
+let h = canvas.height = window.innerHeight;
+class Particle { constructor(){ this.x=Math.random()*w; this.y=Math.random()*h; this.size=Math.random()*3+1; this.speedX=(Math.random()-0.5)*1.5; this.speedY=(Math.random()-0.5)*1.5; } update(){ this.x+=this.speedX; this.y+=this.speedY; if(this.x>w||this.x<0)this.speedX*=-1; if(this.y>h||this.y<0)this.speedY*=-1; } draw(){ ctx.fillStyle='rgba(102,163,255,0.7)'; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); } }
+let particlesArray = [];
+function initParticles(num){ particlesArray=[]; for(let i=0;i<num;i++)particlesArray.push(new Particle()); }
+function connectParticles(){ for(let a=0;a<particlesArray.length;a++){ for(let b=a;b<particlesArray.length;b++){ let dx=particlesArray[a].x-particlesArray[b].x; let dy=particlesArray[a].y-particlesArray[b].y; let dist=Math.sqrt(dx*dx+dy*dy); if(dist<120){ ctx.strokeStyle='rgba(102,163,255,'+(1-dist/120)+')'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x,particlesArray[a].y); ctx.lineTo(particlesArray[b].x,particlesArray[b].y); ctx.stroke(); } } } }
+function animateParticles(){ ctx.clearRect(0,0,w,h); particlesArray.forEach(p=>{ p.update(); p.draw(); }); connectParticles(); requestAnimationFrame(animateParticles); }
+window.addEventListener('resize',()=>{ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; initParticles(120); });
+initParticles(120); animateParticles();
+
+// ===== ANIMAÇÃO DAS SEÇÕES =====
+const observer = new IntersectionObserver(entries=>{ entries.forEach(entry=>{ if(entry.isIntersecting) entry.target.classList.add('visible'); }); },{ threshold:0.18 });
+document.querySelectorAll('section.area, .eixo').forEach(el=>observer.observe(el));
+
+// ===== LIGHTBOX =====
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
+let imgs = Array.from(document.querySelectorAll('.imagens-eixo img'));
+let currentIndex = 0;
+imgs.forEach((img,i)=>{ img.addEventListener('click',()=>{ lightbox.classList.add('show'); lightboxImg.src=img.src; currentIndex=i; }); });
+document.getElementById('prev').addEventListener('click',()=>{ currentIndex=(currentIndex-1+imgs.length)%imgs.length; lightboxImg.src=imgs[currentIndex].src; });
+document.getElementById('next').addEventListener('click',()=>{ currentIndex=(currentIndex+1)%imgs.length; lightboxImg.src=imgs[currentIndex].src; });
+document.getElementById('close').addEventListener('click',()=>{ lightbox.classList.remove('show'); });
+lightbox.addEventListener('click',e=>{ if(e.target===lightbox) lightbox.classList.remove('show'); });
+
+// ===== BOTÃO VOLTAR AO TOPO =====nconst topBtn = document.getElementById('topBtn');
+window.onscroll = function(){ if(document.body.scrollTop>300 || document.documentElement.scrollTop>300) topBtn.style.display="block"; else topBtn.style.display="none"; };
+topBtn.addEventListener('click',()=>{ window.scrollTo({ top:0, behavior:'smooth' }); });
+</script>
+
+</body>
+</html>

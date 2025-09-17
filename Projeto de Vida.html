@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto de Vida</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.1/lottie.min.js"></script>
+
+  <!-- Fonte retrô estilo pixel com neon -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --azul-retro: #112d4e;
+      --azul-medio: #000000;
+      --azul-suave: #000000;
+      --text-color-dark: #53c0ec;
+      --branco: #ffffff;
+      --neon: #00fff7;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Press Start 2P', monospace;
+      background: linear-gradient(135deg, var(--azul-suave), var(--azul-medio));
+      margin: 0;
+      padding: 40px 15px;
+      color: var(--text-color-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* PARTICULAS */
+    #particles {
+      position: fixed;
+      top:0; left:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background: transparent;
+    }
+
+    /* TITULO */
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--neon);
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+      z-index:2;
+      animation: slideDown 1s ease-out, glow 2s infinite alternate;
+      text-shadow: 0 0 5px var(--neon), 0 0 10px var(--neon), 0 0 20px var(--neon);
+    }
+    h1::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--neon);
+      margin: 10px auto 0;
+      border-radius: 2px;
+      box-shadow: 0 0 10px var(--neon);
+    }
+    @keyframes slideDown {
+      from { opacity:0; transform:translateY(-30px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 5px var(--neon), 0 0 10px var(--neon); }
+      to { text-shadow: 0 0 15px var(--neon), 0 0 30px var(--neon); }
+    }
+
+    /* AREAS */
+    .area-container {
+      width:100%;
+      max-width:800px;
+      margin-bottom:20px;
+      border-radius:10px;
+      background-color: var(--branco);
+      box-shadow: 0 6px 15px rgba(17, 45, 78, 0.15);
+      overflow: hidden;
+      transform: scale(0.98);
+      opacity:0;
+      animation: popUp 0.6s ease forwards;
+      z-index:2;
+      position:relative;
+    }
+    .area-container:nth-child(2) { animation-delay:0.2s; }
+    .area-container:nth-child(3) { animation-delay:0.4s; }
+    .area-container:nth-child(4) { animation-delay:0.6s; }
+    .area-container:nth-child(5) { animation-delay:0.8s; }
+    .area-container:nth-child(6) { animation-delay:1s; }
+    @keyframes popUp {
+      to { transform: scale(1); opacity:1; }
+    }
+
+    .area-header {
+      background-color: var(--azul-retro);
+      color: var(--neon);
+      padding: 15px 20px;
+      font-size:1.2rem;
+      font-weight:bold;
+      cursor:pointer;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.3s ease, transform 0.2s;
+      text-shadow: 0 0 5px var(--neon), 0 0 10px var(--neon);
+    }
+    .area-header:hover { background-color:#1c3e6e; transform:translateX(5px); }
+
+    .area-content {
+      max-height:0;
+      overflow:hidden;
+      padding:0 20px;
+      background-color: var(--azul-suave);
+      color: var(--text-color-dark);
+      font-size:1rem;
+      transition: max-height 0.6s ease, padding 0.6s ease;
+    }
+    .area-content.open { max-height:400px; padding:20px; }
+
+    .area-content p { margin:10px 0; }
+
+    .arrow { font-size:1.2rem; transition: transform 0.3s ease; color: var(--neon); text-shadow: 0 0 5px var(--neon),0 0 10px var(--neon); }
+    .arrow.open { transform:rotate(90deg); }
+
+    .lottie-icon { width:40px; height:40px; margin-right:10px; }
+
+    @media (max-width:600px){
+      h1{ font-size:2rem; }
+      .area-header{ font-size:1rem; }
+      .area-content{ font-size:0.95rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fundo de partículas -->
+  <canvas id="particles"></canvas>
+
+  <h1>Projeto de Vida 📈</h1>
+
+  <!-- Áreas do projeto de vida -->
+  <div class="area-container">
+    <div class="area-header" onclick="toggleArea(this)">
+      <div class="header-content">
+        <div id="lottieEdu" class="lottie-icon"></div>
+        🎓 Educação
+      </div>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="area-content">
+      <p><strong>Objetivo:</strong> Concluir curso técnico em Desenvolvimento de Software</p>
+      <p><strong>Ações:</strong> Estudar 3h por dia, praticar programação, realizar projetos</p>
+    </div>
+  </div>
+
+  <div class="area-container">
+    <div class="area-header" onclick="toggleArea(this)">
+      <div class="header-content">
+        <div id="lottieCareer" class="lottie-icon"></div>
+        💼 Carreira
+      </div>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="area-content">
+      <p><strong>Objetivo:</strong> Conseguir estágio na área de TI</p>
+      <p><strong>Ações:</strong> Atualizar currículo, participar de workshops, enviar candidaturas</p>
+    </div>
+  </div>
+
+  <div class="area-container">
+    <div class="area-header" onclick="toggleArea(this)">
+      <div class="header-content">
+        <div id="lottieHealth" class="lottie-icon"></div>
+        🏃 Saúde
+      </div>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="area-content">
+      <p><strong>Objetivo:</strong> Melhorar condicionamento físico</p>
+      <p><strong>Ações:</strong> Fazer exercícios 4x por semana, manter alimentação balanceada</p>
+    </div>
+  </div>
+
+  <div class="area-container">
+    <div class="area-header" onclick="toggleArea(this)">
+      <div class="header-content">
+        <div id="lottieFinance" class="lottie-icon"></div>
+        💰 Financeiro
+      </div>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="area-content">
+      <p><strong>Objetivo:</strong> Economizar para comprar um computador</p>
+      <p><strong>Ações:</strong> Guardar 20% do salário, evitar gastos supérfluos</p>
+    </div>
+  </div>
+
+  <div class="area-container">
+    <div class="area-header" onclick="toggleArea(this)">
+      <div class="header-content">
+        <div id="lottieStudy" class="lottie-icon"></div>
+        📚 Estudos Escolares
+      </div>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="area-content">
+      <p><strong>Objetivo:</strong> Melhorar o desempenho nas disciplinas escolares</p>
+      <p><strong>Ações:</strong> Criar rotina de estudos, revisar conteúdos semanalmente, praticar com simulados e provas antigas, tirar dúvidas com professores, manter cronograma atualizado</p>
+    </div>
+  </div>
+
+  <script>
+    // ACCORDION
+    function toggleArea(header){
+      const content = header.nextElementSibling;
+      const arrow = header.querySelector('.arrow');
+      const isOpen = content.classList.contains("open");
+
+      document.querySelectorAll('.area-content').forEach(div => div.classList.remove("open"));
+      document.querySelectorAll('.arrow').forEach(a => a.classList.remove('open'));
+
+      if(!isOpen){
+        content.classList.add("open");
+        arrow.classList.add('open');
+      }
+    }
+
+    // PARTICULAS
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let particlesArray;
+
+    function initParticles(){
+      particlesArray=[];
+      const num = (canvas.width*canvas.height)/9000;
+      for(let i=0;i<num;i++){
+        const size = Math.random()*2+1;
+        const x=Math.random()*(canvas.width-size*2);
+        const y=Math.random()*(canvas.height-size*2);
+        const speedX=Math.random()*1-0.5;
+        const speedY=Math.random()*1-0.5;
+        particlesArray.push({x,y,size,speedX,speedY});
+      }
+    }
+    function updateParticles(){
+      particlesArray.forEach(p=>{
+        p.x+=p.speedX; p.y+=p.speedY;
+        if(p.x+p.size>canvas.width||p.x-p.size<0)p.speedX*=-1;
+        if(p.y+p.size>canvas.height||p.y-p.size<0)p.speedY*=-1;
+      });
+    }
+    function drawParticles(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particlesArray.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+        ctx.fillStyle="rgba(0,255,247,0.7)";
+        ctx.fill();
+      });
+      connectParticles();
+    }
+    function connectParticles(){
+      for(let a=0;a<particlesArray.length;a++){
+        for(let b=a;b<particlesArray.length;b++){
+          const dx=particlesArray[a].x-particlesArray[b].x;
+          const dy=particlesArray[a].y-particlesArray[b].y;
+          const dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<120){
+            ctx.strokeStyle="rgba(0,255,247,0.2)";
+            ctx.lineWidth=1;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[a].x,particlesArray[a].y);
+            ctx.lineTo(particlesArray[b].x,particlesArray[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+    function animateParticles(){
+      updateParticles();
+      drawParticles();
+      requestAnimationFrame(animateParticles);
+    }
+    window.addEventListener("resize",()=>{
+      canvas.width=window.innerWidth;
+      canvas.height=window.innerHeight;
+      initParticles();
+    });
+    initParticles();
+    animateParticles();
+
+    // LOTTIE ICONS
+    function loadLottie(id,path){
+      lottie.loadAnimation({
+        container:document.getElementById(id),
+        renderer:'svg',
+        loop:true,
+        autoplay:true,
+        path:path
+      });
+    }
+    loadLottie('lottieEdu','https://assets3.lottiefiles.com/packages/lf20_tll0j4bb.json');
+    loadLottie('lottieCareer','https://assets3.lottiefiles.com/packages/lf20_kxsd2ytq.json');
+    loadLottie('lottieHealth','https://assets3.lottiefiles.com/packages/lf20_x62chJ.json');
+    loadLottie('lottieFinance','https://assets3.lottiefiles.com/packages/lf20_mkczw3.json');
+    loadLottie('lottieStudy','https://assets3.lottiefiles.com/packages/lf20_9rtk4t.json');
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anexos - Portfólio</title>
+  <!-- Fonte Pixelada -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background: linear-gradient(135deg, #021024, #000000, #001727);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      text-align: center;
+      color: #ffffff;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin: 40px 0;
+      color: #f0f5ff;
+      text-shadow: 0 0 8px #000000, 0 0 20px #02264b, 0 0 30px #0c3f3f;
+      animation: fadeDown 1.2s ease;
+      z-index: 2;
+    }
+
+    /* ===== GALERIA ===== */
+    .galeria {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      width: 100%;
+      max-width: 1400px;
+      padding: 20px;
+      z-index: 2;
+    }
+
+    .imagem-box {
+      background: rgba(0, 0, 0, 0.85);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 200, 255, 0.6), 0 0 30px rgba(0, 100, 200, 0.4);
+      max-width: 320px;
+      width: 100%;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .imagem-box img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      transition: transform 0.4s ease;
+    }
+
+    .imagem-box:hover {
+      transform: scale(1.08) rotate(-1deg);
+      box-shadow: 0 0 25px #000000, 0 0 50px #000000;
+    }
+
+    .imagem-box:hover img {
+      transform: scale(1.1);
+    }
+
+    .imagem-box h3 {
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      color: #e3f2fd;
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    }
+
+    .imagem-box p {
+      font-size: 0.7rem;
+      color: #cfd8dc;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .botao-info {
+      display: inline-block;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 0.7rem;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0, 150, 255, 0.8);
+    }
+
+    .botao-info:hover {
+      background: linear-gradient(135deg, #29ffc6, #20e3b2);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 255, 200, 0.9);
+    }
+
+    /* ===== MODAL ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: #0a192f;
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 520px;
+      text-align: center;
+      color: #fff;
+      animation: fadeUp 0.6s ease;
+      box-shadow: 0 0 20px #000000, 0 0 40px #000000;
+      border: 2px solid #135162;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 10px;
+      font-size: 1rem;
+      text-shadow: 0 0 10px #00eaff;
+    }
+
+    .modal-content p {
+      font-size: 0.7rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .fechar {
+      background: linear-gradient(135deg, #6739e6, #4e00c2);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.6rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .fechar:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #000000, 0 0 30px #13002f;
+    }
+
+    /* ===== BOTÃO VOLTAR AO TOPO ===== */
+    #btnTopo {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: linear-gradient(135deg, #000000, #000000, rgb(0, 0, 36));
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      padding: 15px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
+      display: none;
+      transition: background 0.3s ease, transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    #btnTopo:hover {
+      background: linear-gradient(135deg, #202b28, #012b36);
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(0, 255, 200, 1);
+    }
+
+    /* ===== ANIMAÇÕES ===== */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== CANVAS DE PARTÍCULAS ===== */
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: transparent;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas -->
+  <canvas id="particles"></canvas>
+
+  <h1>📂 Anexos</h1>
+
+  <div class="galeria">
+    <!-- Atividade 1 -->
+    <div class="imagem-box">
+      <img src="igm/diario de bordowçiueh.png" alt="Diário de Bordo">
+      <h3>Diário de Bordo</h3>
+      <p>Registros da visita à faculdade UFPI.</p>
+      <button class="botao-info" onclick="abrirModal('Diário de Bordo', 'Um documento com anotações e reflexões da visita realizada à UFPI.')">ℹ Saiba mais</button>
+    </div>
+
+    <!-- Atividade 2 -->
+    <div class="imagem-box">
+      <img src="igm/login.png" alt="Atividade Cleiton - Login">
+      <h3>Login - Atividade Cleiton</h3>
+      <p>Interface com validação de login.</p>
+      <button class="botao-info" onclick="abrirModal('Login - Atividade Cleiton', 'Atividade prática sobre autenticação e interface de login.')">ℹ Saiba mais</button>
+    </div>
+
+    <!-- Atividade 3 -->
+    <div class="imagem-box">
+      <img src="img/projeto.png" alt="Projeto Extra">
+      <h3>Projeto Extra</h3>
+      <p>Protótipo adicional do portfólio.</p>
+      <button class="botao-info" onclick="abrirModal('Projeto Extra', 'Protótipo complementar do portfólio com design experimental.')">ℹ Saiba mais</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2 id="modalTitulo"></h2>
+      <p id="modalDescricao"></p>
+      <button class="fechar" onclick="fecharModal()">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Botão voltar ao topo -->
+  <button id="btnTopo">⬆</button>
+
+  <script>
+    /* ===== VOLTAR AO TOPO ===== */
+    const btnTopo = document.getElementById("btnTopo");
+    window.onscroll = function () {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        btnTopo.style.display = "block";
+      } else {
+        btnTopo.style.display = "none";
+      }
+    };
+    btnTopo.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    /* ===== MODAL ===== */
+    function abrirModal(titulo, descricao) {
+      document.getElementById("modalTitulo").innerText = titulo;
+      document.getElementById("modalDescricao").innerText = descricao;
+      document.getElementById("modal").style.display = "flex";
+    }
+    function fecharModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    /* ===== PARTÍCULAS ===== */
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray;
+    let hue = 200;
+
+    function initParticles() {
+      particlesArray = [];
+      const numberOfParticles = (canvas.width * canvas.height) / 9000;
+      for (let i = 0; i < numberOfParticles; i++) {
+        const size = (Math.random() * 2) + 1;
+        const x = Math.random() * (canvas.width - size * 2);
+        const y = Math.random() * (canvas.height - size * 2);
+        const speedX = (Math.random() * 1) - 0.5;
+        const speedY = (Math.random() * 1) - 0.5;
+        particlesArray.push({ x, y, size, speedX, speedY });
+      }
+    }
+
+    function updateParticles() {
+      for (let i = 0; i < particlesArray.length; i++) {
+        let p = particlesArray[i];
+        p.x += p.speedX;
+        p.y += p.speedY;
+        if (p.x + p.size > canvas.width || p.x - p.size < 0) p.speedX *= -1;
+        if (p.y + p.size > canvas.height || p.y - p.size < 0) p.speedY *= -1;
+      }
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hue += 0.5;
+      for (let i = 0; i < particlesArray.length; i++) {
+        let p = particlesArray[i];
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = "hsl(" + (hue % 360) + ", 100%, 70%)";
+        ctx.fill();
+      }
+      connectParticles();
+    }
+
+    function connectParticles() {
+      for (let a = 0; a < particlesArray.length; a++) {
+        for (let b = a; b < particlesArray.length; b++) {
+          let dx = particlesArray[a].x - particlesArray[b].x;
+          let dy = particlesArray[a].y - particlesArray[b].y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 120) {
+            ctx.strokeStyle = "hsla(" + (hue % 360) + ", 100%, 70%, 0.15)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      updateParticles();
+      drawParticles();
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
+
+    initParticles();
+    animate();
+  </script>
+</body>
+</html>

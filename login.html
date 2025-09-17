@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Login | Portfólio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<!-- FONTES -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --fundo-escuro: #030706;
+  --neon-azul: #00fff7;
+  --neon-pink: #7b00ff;
+  --neon-verde: #14ebff;
+  --neon-laranja: #10ebff;
+  --branco: #b3f4f1;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Orbitron', sans-serif; /* Futurista para textos gerais */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--fundo-escuro);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: var(--branco);
+}
+
+canvas#waveCanvas,
+canvas#hexGridCanvas,
+canvas#matrixCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+canvas#waveCanvas { z-index: -3; }
+canvas#hexGridCanvas { z-index: -2; }
+canvas#matrixCanvas { z-index: -1; }
+
+.login-box {
+  position: relative;
+  background: rgba(0,0,0,0.4);
+  padding: 50px 40px;
+  border-radius: 25px;
+  box-shadow: 0 0 40px var(--neon-azul), 0 0 80px var(--neon-pink), 0 0 60px var(--neon-verde);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  border: 1px solid var(--neon-azul);
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+}
+
+.login-box h2 {
+  margin-bottom: 30px;
+  font-size: 1.4rem;
+  font-family: 'Press Start 2P', cursive; /* Retrô para título */
+  color: var(--neon-azul);
+  text-shadow: 0 0 15px var(--neon-azul), 0 0 35px var(--neon-pink), 0 0 50px var(--neon-verde);
+  animation: neonText 2s infinite alternate;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 45px 14px 15px;
+  border-radius: 18px;
+  border: 2px solid var(--neon-azul);
+  font-size: 1rem;
+  font-family: 'Orbitron', sans-serif; /* Legível */
+  background: rgba(0,0,0,0.3);
+  color: var(--branco);
+  box-shadow: 0 0 20px var(--neon-azul), 0 0 30px var(--neon-pink);
+}
+
+.input-group input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.input-group input:focus {
+  outline: none;
+  box-shadow: 0 0 30px var(--neon-azul), 0 0 50px var(--neon-pink), 0 0 35px var(--neon-verde);
+  border-color: var(--neon-verde);
+}
+
+.input-group i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3rem;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 18px;
+  background-color: transparent;
+  border: 3px solid var(--neon-azul);
+  color: var(--branco);
+  border-radius: 35px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Press Start 2P', cursive; /* Retrô para botões */
+}
+
+.login-box button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(120deg, var(--neon-azul), var(--neon-pink), var(--neon-verde), var(--neon-laranja));
+  z-index: -1;
+  transition: all 0.6s ease;
+}
+
+.login-box button:hover::before {
+  left: 0;
+}
+
+.login-box button:hover {
+  color: black;
+  box-shadow: 0 0 40px var(--neon-verde), 0 0 70px var(--neon-pink), 0 0 50px var(--neon-azul);
+  transform: scale(1.08);
+}
+
+.error-message {
+  color: var(--neon-pink);
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+  display: none;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.welcome-message {
+  position: fixed;
+  top: 20px;
+  font-size: 1rem;
+  text-align: center;
+  width: 100%;
+  color: var(--neon-verde);
+  text-shadow: 0 0 15px var(--neon-verde), 0 0 25px var(--neon-pink), 0 0 35px var(--neon-azul);
+  font-family: 'Press Start 2P', cursive;
+}
+
+@keyframes neonText {
+  0% { text-shadow: 0 0 15px var(--neon-azul), 0 0 35px var(--neon-pink); }
+  50% { text-shadow: 0 0 25px var(--neon-verde), 0 0 45px var(--neon-pink); }
+  100% { text-shadow: 0 0 20px var(--neon-azul), 0 0 40px var(--neon-verde); }
+}
+
+@media (max-width: 480px) {
+  .login-box {
+    padding: 35px 25px;
+  }
+}
+</style>
+</head>
+<body>
+
+<canvas id="waveCanvas"></canvas>
+<canvas id="hexGridCanvas"></canvas>
+<canvas id="matrixCanvas"></canvas> 
+
+<div class="welcome-message">🔓 Acesso ao sistema liberado... inicializando interface...</div>
+
+<div class="login-box">
+  <h2><i class="fas fa-user-lock"></i> Acessar Portfólio</h2>
+  <form id="loginForm">
+    <div class="input-group">
+      <input type="text" id="login" name="login" placeholder="Digite seu login" required autocomplete="username" />
+      <i class="fas fa-user"></i>
+    </div>
+    <div class="input-group">
+      <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required autocomplete="current-password" />
+      <i class="fas fa-key"></i>
+    </div>
+    <div class="error-message" id="erro">⚠️ USUÁRIO NÃO IDENTIFICADO. AUTO-REBÓT INICIADO...</div>
+    <button type="submit">Entrar</button>
+  </form>
+</div>
+
+<script>
+// LOGIN FUNCIONAL
+const form = document.getElementById("loginForm");
+const erro = document.getElementById("erro");
+const USUARIO = "aluno";
+const SENHA = "123456789";
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+  const login = form.login.value.trim();
+  const senha = form.senha.value.trim();
+  if(login === USUARIO && senha === SENHA){
+    erro.style.display = "none";
+    const welcome = document.querySelector(".welcome-message");
+    welcome.textContent = "🔓 Login validado. Bem-vindo(a) usuário autorizado!";
+    welcome.style.color = "#00ffcc";
+    welcome.style.textShadow = "0 0 20px #00ffcc, 0 0 40px #00ffcc";
+    setTimeout(()=>{ window.location.href = "index.html"; },2000);
+  } else {
+    erro.style.display = "block";
+  }
+});
+
+// EFEITO DE ONDAS
+const waveCanvas = document.getElementById('waveCanvas');
+const waveCtx = waveCanvas.getContext('2d');
+waveCanvas.width = window.innerWidth;
+waveCanvas.height = window.innerHeight;
+
+const waveCount = 7;
+const waveSpeed = 0.03;
+const waveAmplitude = 60;
+const waveFrequency = 0.008;
+const loopDuration = 1000;
+let waveOffset = 0;
+
+function drawWaves() {
+    waveCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+
+    for (let i = 0; i < waveCount; i++) {
+        waveCtx.beginPath();
+        const yOffset = waveCanvas.height / 2 + (i * 25 - (waveCount * 12));
+        for (let x = 0; x < waveCanvas.width; x++) {
+            const noise = Math.sin(x * waveFrequency + waveOffset / (2 * Math.PI)) * waveAmplitude;
+            const y = yOffset + noise;
+            if (x === 0) waveCtx.moveTo(x, y);
+            else waveCtx.lineTo(x, y);
+        }
+        waveCtx.strokeStyle = `hsla(${(360*i/waveCount + waveOffset%360)}, 100%, 70%, 0.3)`;
+        waveCtx.lineWidth = 2.5;
+        waveCtx.stroke();
+    }
+    waveOffset++;
+    requestAnimationFrame(drawWaves);
+}
+drawWaves();
+window.addEventListener('resize', ()=>{ waveCanvas.width = window.innerWidth; waveCanvas.height = window.innerHeight; });
+
+// GRADE HEXAGONAL
+const hexGridCanvas = document.getElementById('hexGridCanvas');
+const hexCtx = hexGridCanvas.getContext('2d');
+hexGridCanvas.width = window.innerWidth;
+hexGridCanvas.height = window.innerHeight;
+
+const hexSize = 30;
+const hexWidth = hexSize * 2;
+const hexHeight = Math.sqrt(3) * hexSize;
+const hexColors_Grid = ['rgba(0,255,247,0.1)','rgba(123,0,255,0.1)','rgba(20,235,255,0.1)','rgba(0,255,213,0.1)'];
+
+let hexGrid = [];
+let timeGrid = 0;
+
+function drawHexagon(x,y,size,color){
+  hexCtx.beginPath();
+  for(let i=0;i<6;i++){
+    const angle = Math.PI/3*i;
+    hexCtx.lineTo(x+size*Math.cos(angle),y+size*Math.sin(angle));
+  }
+  hexCtx.closePath();
+  hexCtx.strokeStyle=color;
+  hexCtx.lineWidth=1;
+  hexCtx.stroke();
+}
+
+function initHexGrid(){
+  hexGrid=[];
+  const rowCount = Math.ceil(hexGridCanvas.height/(hexHeight*0.75))+3;
+  const colCount = Math.ceil(hexGridCanvas.width/(hexWidth*0.75))+3;
+  for(let r=-1;r<rowCount;r++){
+    for(let c=-1;c<colCount;c++){
+      let x=c*hexWidth*0.75;
+      let y=r*hexHeight;
+      if(c%2===1)y+=hexHeight/2;
+      hexGrid.push({baseX:x,baseY:y,colorIndex:Math.floor(Math.random()*hexColors_Grid.length),randomSizeOffset:Math.random()*(hexSize*0.2)-(hexSize*0.1)});
+    }
+  }
+}
+
+function animateHexGrid(){
+  hexCtx.fillStyle='rgba(0,9,28,0.03)';
+  hexCtx.fillRect(0,0,hexGridCanvas.width,hexGridCanvas.height);
+  hexGrid.forEach(hex=>{
+    let currentX=hex.baseX+(timeGrid*0.5)%(hexWidth*0.75*2);
+    let currentY=hex.baseY+(timeGrid*0.5*0.5)%(hexHeight*2);
+    if(currentX>hexGridCanvas.width+hexWidth*2) currentX-=(hexGridCanvas.width+hexWidth*2);
+    if(currentY>hexGridCanvas.height+hexHeight*2) currentY-=(hexGridCanvas.height+hexHeight*2);
+    drawHexagon(currentX,currentY,hexSize+hex.randomSizeOffset,hexColors_Grid[hex.colorIndex]);
+  });
+  timeGrid++;
+  requestAnimationFrame(animateHexGrid);
+}
+initHexGrid();
+animateHexGrid();
+window.addEventListener('resize',()=>{ hexGridCanvas.width=window.innerWidth; hexGridCanvas.height=window.innerHeight; initHexGrid(); });
+
+// MATRIX DIGITAL
+const matrixCanvas = document.getElementById('matrixCanvas');
+const matrixCtx = matrixCanvas.getContext('2d');
+matrixCanvas.width = window.innerWidth;
+matrixCanvas.height = window.innerHeight;
+
+const font_size=16;
+let columns=Math.floor(matrixCanvas.width/font_size);
+const drops=[];
+for(let x=0;x<columns;x++)drops[x]=1;
+const characters='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:",./<>?`~';
+const matrixColors=['rgba(0,255,247,0.7)','rgba(123,0,255,0.7)','rgba(20,235,255,0.7)','rgba(0,255,213,0.7)','rgba(255,0,255,0.7)'];
+
+function drawMatrix(){
+  matrixCtx.fillStyle='rgba(0,9,28,0.05)';
+  matrixCtx.fillRect(0,0,matrixCanvas.width,matrixCanvas.height);
+  matrixCtx.font=font_size+'px monospace';
+  for(let i=0;i<drops.length;i++){
+    const text=characters.charAt(Math.floor(Math.random()*characters.length));
+    matrixCtx.fillStyle=matrixColors[i%matrixColors.length];
+    matrixCtx.fillText(text,i*font_size,drops[i]*font_size);
+    if(drops[i]*font_size>matrixCanvas.height && Math.random()>0.975)drops[i]=0;
+    drops[i]++;
+  }
+  requestAnimationFrame(drawMatrix);
+}
+drawMatrix();
+window.addEventListener('resize',()=>{
+  matrixCanvas.width=window.innerWidth;
+  matrixCanvas.height=window.innerHeight;
+  columns=Math.floor(matrixCanvas.width/font_size);
+  drops.length=0;
+  for(let x=0;x<columns;x++)drops[x]=1;
+});
+</script>
+
+</body>
+</html>

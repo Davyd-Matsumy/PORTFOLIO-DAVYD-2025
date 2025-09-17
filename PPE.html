@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Plano Pessoal de Estudo</title>
+
+<!-- Fonte retrô estilo pixel com efeito neon -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --fundo: #000010;           /* Fundo escuro */
+    --fundo-secao: rgba(0, 10, 30, 0.9); /* Fundo das seções */
+    --neon: #00fff7;            /* Neon principal */
+    --neon-sec: #ff00ff;        /* Neon secundário */
+    --texto-claro: #b3f4f1;
+    --texto-sec: #a0e7ff;
+    --borda: rgba(0,255,247,0.5);
+  }
+
+  /* ===== BASE ===== */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Press Start 2P', monospace;
+    background: var(--fundo);
+    color: var(--texto-claro);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(90deg, #001d2e, #002f3f);
+    color: var(--neon);
+    padding: 25px 0;
+    text-align: center;
+    box-shadow: 0 2px 15px rgba(0, 255, 247, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    animation: slideDown 1s ease;
+    text-shadow: 0 0 5px var(--neon), 0 0 15px var(--neon), 0 0 25px var(--neon-sec);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    animation: glow 2s infinite alternate;
+    color: var(--neon);
+    text-shadow: 0 0 5px var(--neon), 0 0 10px var(--neon), 0 0 20px var(--neon-sec);
+  }
+
+  /* ===== SECTION ===== */
+  section {
+    background: var(--fundo-secao);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 255, 247, 0.2);
+    padding: 25px;
+    margin: 40px auto;
+    max-width: 700px;
+    animation: fadeInUp 1s ease both;
+    border: 1px solid var(--borda);
+  }
+
+  h2 {
+    color: var(--neon);
+    font-size: 1.3rem;
+    border-bottom: 2px solid var(--neon);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+  }
+
+  /* ===== DISCIPLINAS ===== */
+  .disciplina {
+    margin-bottom: 15px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    overflow: hidden;
+    transform: translateY(30px);
+    opacity: 0;
+    animation: fadeInUp 0.8s forwards;
+  }
+
+  .disciplina:nth-child(1) { animation-delay: 0.2s; }
+  .disciplina:nth-child(2) { animation-delay: 0.4s; }
+  .disciplina:nth-child(3) { animation-delay: 0.6s; }
+  .disciplina:nth-child(4) { animation-delay: 0.8s; }
+  .disciplina:nth-child(5) { animation-delay: 1s; }
+
+  .disciplina-header {
+    background-color: #001f30;
+    color: var(--neon);
+    padding: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s, transform 0.2s;
+    text-shadow: 0 0 5px var(--neon), 0 0 10px var(--neon-sec);
+  }
+
+  .disciplina-header:hover {
+    background-color: #003b5c;
+    transform: scale(1.02);
+  }
+
+  .disciplina-conteudo {
+    max-height: 0;
+    overflow: hidden;
+    background: #001020;
+    padding: 0 15px;
+    color: var(--texto-sec);
+    transition: max-height 0.5s ease, padding 0.5s ease;
+  }
+
+  .disciplina-conteudo.ativo {
+    max-height: 200px;
+    padding: 15px;
+  }
+
+  .disciplina-conteudo p {
+    margin: 5px 0;
+  }
+
+  /* ===== METAS ===== */
+  section ul {
+    list-style: none;
+    padding-left: 10px;
+  }
+
+  section ul li {
+    margin: 8px 0;
+    color: var(--texto-sec);
+    text-shadow: 0 0 3px var(--neon);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    color: var(--neon-sec);
+    background: #001020;
+    margin-top: 30px;
+    box-shadow: 0 -2px 10px rgba(0, 255, 247, 0.1);
+    animation: fadeIn 2s ease;
+    text-shadow: 0 0 3px var(--neon), 0 0 10px var(--neon-sec);
+  }
+
+  /* ===== ICONES ===== */
+  .arrow {
+    font-size: 1.2em;
+    transition: transform 0.3s;
+    color: var(--neon);
+    text-shadow: 0 0 5px var(--neon), 0 0 10px var(--neon-sec);
+  }
+
+  .arrow.open {
+    transform: rotate(90deg);
+  }
+
+  /* ===== ANIMAÇÕES ===== */
+  @keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon); }
+    to { text-shadow: 0 0 20px var(--neon), 0 0 40px var(--neon-sec); }
+  }
+
+  /* ===== RESPONSIVO ===== */
+  @media (max-width: 600px) {
+    section {
+      margin: 20px;
+      padding: 20px;
+    }
+
+    .disciplina-header {
+      font-size: 0.8rem;
+    }
+
+    h1 {
+      font-size: 1rem;
+    }
+  }
+
+  /* ===== BACKGROUND ANIMADO ===== */
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: var(--fundo);
+  }
+</style>
+</head>
+<body>
+  <canvas id="bgCanvas"></canvas>
+
+  <header>
+    <h1>Plano Pessoal de Estudo</h1>
+  </header>
+
+  <section>
+    <h2>Áreas de Conhecimento</h2>
+
+    <div class="disciplina">
+      <div class="disciplina-header" onclick="toggleConteudo(this)">
+        Linguagens <span class="arrow">▶</span>
+      </div>
+      <div class="disciplina-conteudo"><p><strong>Quinta-feira:</strong> 18h - 19h</p></div>
+    </div>
+
+    <div class="disciplina">
+      <div class="disciplina-header" onclick="toggleConteudo(this)">
+        Humanas <span class="arrow">▶</span>
+      </div>
+      <div class="disciplina-conteudo"><p><strong>Quarta-feira:</strong> 18h - 20h</p></div>
+    </div>
+
+    <div class="disciplina">
+      <div class="disciplina-header" onclick="toggleConteudo(this)">
+        Matemática <span class="arrow">▶</span>
+      </div>
+      <div class="disciplina-conteudo"><p><strong>Segunda-feira:</strong> 18h - 20h</p></div>
+    </div>
+
+    <div class="disciplina">
+      <div class="disciplina-header" onclick="toggleConteudo(this)">
+        Natureza <span class="arrow">▶</span>
+      </div>
+      <div class="disciplina-conteudo"><p><strong>Terça-feira:</strong> 18h - 19h</p></div>
+    </div>
+
+    <div class="disciplina">
+      <div class="disciplina-header" onclick="toggleConteudo(this)">
+        SENAI <span class="arrow">▶</span>
+      </div>
+      <div class="disciplina-conteudo"><p><strong>Sexta-feira:</strong> 18h - 20h</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Metas Semanais</h2>
+    <ul>
+      <li>Completar exercícios práticos</li>
+      <li>Estudar a teoria</li>
+      <li>Revisar as matérias mais importantes</li>
+      <li>Ler resumos</li>
+      <li>Praticar outros idiomas (inglês)</li>
+    </ul>
+  </section>
+
+  <footer>
+    &copy; 2025 Meu Plano de Estudo
+  </footer>
+
+  <script>
+    // Abrir/Fechar disciplinas
+    function toggleConteudo(header) {
+      const conteudo = header.nextElementSibling;
+      const seta = header.querySelector('.arrow');
+      const ativo = conteudo.classList.contains("ativo");
+
+      document.querySelectorAll(".disciplina-conteudo").forEach(div => div.classList.remove("ativo"));
+      document.querySelectorAll(".arrow").forEach(arrow => arrow.classList.remove("open"));
+
+      if (!ativo) {
+        conteudo.classList.add("ativo");
+        seta.classList.add("open");
+      }
+    }
+
+    // Fundo de partículas neon
+    const canvas = document.getElementById("bgCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.fillStyle = "rgba(0,255,247,0.7)";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < 80; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animate);
+    }
+
+    initParticles();
+    animate();
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
+  </script>
+</body>
+</html>

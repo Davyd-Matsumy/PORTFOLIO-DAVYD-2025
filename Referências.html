@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Links de Estudos</title>
+
+<!-- Fonte pixel retrô -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<!-- Lottie -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+
+<style>
+  body {
+    font-family: 'Press Start 2P', cursive;
+    margin: 0;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-x: hidden;
+    position: relative;
+    color: #f0f0f0;
+  }
+
+  #particles { position: fixed; top:0; left:0; width:100%; height:100%; z-index:0; }
+
+  .links-estudos {
+    max-width: 760px;
+    width: 100%;
+    background-color: rgba(15, 20, 35, 0.9);
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgb(1, 4, 28), 0 0 40px rgb(2, 0, 33);
+    position: relative;
+    z-index:2;
+    animation: fadeIn 1.2s ease forwards;
+  }
+
+  .links-estudos h2 {
+    margin-bottom: 28px;
+    border-left: 6px solid #020d0c;
+    padding-left: 16px;
+    font-size: 1.2rem;
+    color: #070313;
+    text-shadow: 0 0 6px #00ffe7, 0 0 12px #0077ff;
+    animation: pulse 2.5s infinite;
+  }
+
+  ul { list-style: none; padding: 0; margin: 0; }
+
+  li { margin-bottom: 20px; }
+
+  a.link-estudo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #f0f0f0;
+    font-size: 0.75rem;
+    padding: 14px 18px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 6px rgb(2, 0, 32);
+    background: rgb(15, 23, 38);
+    opacity: 0;
+    transform: translateY(30px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  a.link-estudo.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.6s ease;
+  }
+
+  a.link-estudo:hover {
+    background: linear-gradient(90deg, #00ffe7, #0077ff);
+    color: #000;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 0 12px #000000, 0 0 24px #0077ff;
+  }
+
+  a.link-estudo img {
+    width: 42px;
+    height: 42px;
+    margin-right: 14px;
+    object-fit: contain;
+    border-radius: 6px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  a.link-estudo:hover img {
+    filter: brightness(120%) drop-shadow(0 0 6px #fff);
+    transform: scale(1.15);
+  }
+
+  .lottie-icon {
+    width: 52px;
+    height: 52px;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  /* Animações */
+  @keyframes pulse {
+    0%, 100% { text-shadow: 0 0 6px #00e1ff, 0 0 12px #00e1ff; }
+    50% { text-shadow: 0 0 12px #00012e, 0 0 24px #02071d; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @media (max-width:768px){
+    body { padding: 20px 10px; }
+    .links-estudos h2{ font-size:0.9rem; }
+    a.link-estudo{ font-size:0.6rem; flex-direction: column; text-align: center; }
+    a.link-estudo img{ width:34px; height:34px; margin: 0 0 8px 0; }
+    .lottie-icon{ width:40px; height:40px; margin:0 0 8px 0; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<section class="links-estudos">
+  <h2>Links de Estudos Recomendados</h2>
+  <ul>
+    <li>
+      <a href="https://www.todamateria.com.br/" target="_blank" class="link-estudo">
+        <div class="lottie-icon" id="lottie-todamateria"></div>
+        <img src="c:/Users/SENAI/Downloads/todamateria.webp" alt="Toda Matéria Logo">
+        Toda Matéria
+      </a>
+    </li>
+    <li>
+      <a href="https://chat.openai.com/" target="_blank" class="link-estudo">
+        <div class="lottie-icon" id="lottie-chatgpt"></div>
+        <img src="c:/Users/SENAI/Downloads/logo-chatgpt.jpg" alt="ChatGPT Logo">
+        ChatGPT
+      </a>
+    </li>
+    <li>
+      <a href="https://www.khanacademy.org/" target="_blank" class="link-estudo">
+        <div class="lottie-icon" id="lottie-khan"></div>
+        <img src="c:/Users/SENAI/Downloads/Logo-Khan Academy.webp" alt="Khan Academy Logo">
+        Khan Academy
+      </a>
+    </li>
+    <li>
+      <a href="https://www.coursera.org/" target="_blank" class="link-estudo">
+        <div class="lottie-icon" id="lottie-coursera"></div>
+        <img src="c:/Users/SENAI/Downloads/coursera.webp" alt="Coursera Logo">
+        Coursera
+      </a>
+    </li>
+    <li>
+      <a href="https://developer.mozilla.org/pt-BR/" target="_blank" class="link-estudo">
+        <div class="lottie-icon" id="lottie-mdn"></div>
+        <img src="c:/Users/SENAI/Downloads/logo-MDN Web Docs.webp" alt="MDN Web Docs Logo">
+        MDN Web Docs
+      </a>
+    </li>
+    <li>
+      <a href="https://www.estudegratis.com.br/" target="_blank" class="link-estudo">
+        <div class="lottie-icon" id="lottie-estudegratis"></div>
+        <img src="c:/Users/SENAI/Downloads/Logo-Estude Gratis.webp" alt="Estude Grátis Logo">
+        Estude Grátis
+      </a>
+    </li>
+    <li>
+      <a href="https://www.alura.com.br/" target="_blank" class="link-estudo">
+        <div class="lottie-icon" id="lottie-alura"></div>
+        <img src="https://www.alura.com.br/favicon.ico" alt="Alura Logo">
+        Alura
+      </a>
+    </li>
+    <li>
+      <a href="https://www.udemy.com/" target="_blank" class="link-estudo">
+        <div class="lottie-icon" id="lottie-udemy"></div>
+        <img src="c:/Users/SENAI/Downloads/Logo-Undemy.png" alt="Udemy Logo">
+        Udemy
+      </a>
+    </li>
+    <li>
+      <a href="https://www.youtube.com/education" target="_blank" class="link-estudo">
+        <div class="lottie-icon" id="lottie-youtube"></div>
+        <img src="igm/baixados.jpg" alt="YouTube Edu Logo">
+        YouTube
+      </a>
+    </li>
+    <li>
+      <a href="https://www.educamaisbrasil.com.br/" target="_blank" class="link-estudo">
+        <div class="lottie-icon" id="lottie-educamais"></div>
+        <img src="c:/Users/SENAI/Downloads/Logo-Educa mais Brasil.webp" alt="Educa Mais Brasil Logo">
+        Educa Mais Brasil
+      </a>
+    </li>
+  </ul>
+</section>
+
+<script>
+  // Partículas neon
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  let particlesArray = [];
+
+  function initParticles(){
+    particlesArray=[];
+    const num = (canvas.width*canvas.height)/9000;
+    for(let i=0;i<num;i++){
+      const size=Math.random()*2+1;
+      const x=Math.random()*canvas.width;
+      const y=Math.random()*canvas.height;
+      const speedX=Math.random()*1-0.5;
+      const speedY=Math.random()*1-0.5;
+      particlesArray.push({x,y,size,speedX,speedY});
+    }
+  }
+
+  function drawParticles(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particlesArray.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fillStyle='rgba(0,255,255,0.7)';
+      ctx.shadowColor='rgba(0,255,255,0.8)';
+      ctx.shadowBlur=10;
+      ctx.fill();
+    });
+    for(let a=0;a<particlesArray.length;a++){
+      for(let b=a;b<particlesArray.length;b++){
+        const dx=particlesArray[a].x-particlesArray[b].x;
+        const dy=particlesArray[a].y-particlesArray[b].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<120){
+          ctx.strokeStyle='rgba(0,255,255,0.2)';
+          ctx.lineWidth=1;
+          ctx.beginPath();
+          ctx.moveTo(particlesArray[a].x,particlesArray[a].y);
+          ctx.lineTo(particlesArray[b].x,particlesArray[b].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function updateParticles(){
+    particlesArray.forEach(p=>{
+      p.x+=p.speedX; p.y+=p.speedY;
+      if(p.x>canvas.width || p.x<0) p.speedX*=-1;
+      if(p.y>canvas.height || p.y<0) p.speedY*=-1;
+    });
+  }
+
+  function animateParticles(){
+    updateParticles();
+    drawParticles();
+    requestAnimationFrame(animateParticles);
+  }
+
+  window.addEventListener('resize', ()=>{
+    canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+    initParticles();
+  });
+
+  initParticles();
+  animateParticles();
+
+  // Fade-in ao scroll
+  const links = document.querySelectorAll('.link-estudo');
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, {threshold:0.3});
+  links.forEach(link=>observer.observe(link));
+
+  // Lottie Icons
+  const lotties = [
+    {id:'lottie-todamateria', url:'https://assets3.lottiefiles.com/packages/lf20_jcikwtux.json'},
+    {id:'lottie-chatgpt', url:'https://assets3.lottiefiles.com/packages/lf20_gz3qz3om.json'},
+    {id:'lottie-khan', url:'https://assets2.lottiefiles.com/packages/lf20_CaN8Qx.json'},
+    {id:'lottie-coursera', url:'https://assets3.lottiefiles.com/packages/lf20_fcfj4xhw.json'},
+    {id:'lottie-mdn', url:'https://assets10.lottiefiles.com/packages/lf20_x62chJ.json'},
+    {id:'lottie-estudegratis', url:'https://assets7.lottiefiles.com/packages/lf20_f1pyrfef.json'},
+    {id:'lottie-alura', url:'https://assets1.lottiefiles.com/packages/lf20_gz8hjv.json'},
+    {id:'lottie-udemy', url:'https://assets9.lottiefiles.com/packages/lf20_9wpyhd.json'},
+    {id:'lottie-youtube', url:'https://assets5.lottiefiles.com/packages/lf20_8ydkfl.json'},
+    {id:'lottie-educamais', url:'https://assets4.lottiefiles.com/packages/lf20_3f3uq1.json'}
+  ];
+
+  lotties.forEach(l=>{
+    lottie.loadAnimation({
+      container: document.getElementById(l.id),
+      renderer: 'svg',
+      loop:true,
+      autoplay:true,
+      path: l.url
+    });
+  });
+</script>
+
+</body>
+</html>

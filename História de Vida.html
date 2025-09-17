@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Minha História de Vida - Retrô</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --azul-retro: #000000;
+  --azul-medio: #000000;
+  --azul-suave: #050309e6;
+  --branco: #ffffff;
+  --timeline-color: #000000;
+  --timeline-bg: rgb(0, 0, 0);
+  --neon-azul: #000000;
+  --neon-pink: #00e0fe;
+}
+
+/* RESET */
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, var(--azul-suave), var(--azul-medio));
+  color: var(--azul-retro);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* PARTICULAS */
+#particles {
+  position: fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+}
+
+/* HEADER */
+header {
+  background: var(--azul-retro);
+  color: var(--azul-suave);
+  padding:50px 20px;
+  text-align:center;
+  box-shadow:0 4px 12px rgb(17, 69, 78);
+  position: relative;
+  z-index:2;
+}
+header h1 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2rem;
+  color: var(--neon-azul);
+  text-shadow: 0 0 5px var(--neon-azul), 0 0 10px var(--neon-pink);
+  animation: neonPulse 2.5s infinite alternate;
+}
+
+/* MAIN */
+main {
+  max-width: 1000px;
+  margin:40px auto;
+  padding:0 20px;
+  position: relative;
+  z-index:2;
+}
+
+/* TIMELINE */
+.timeline {
+  position: relative;
+  margin:40px 0;
+  padding-left:40px;
+}
+.timeline::before {
+  content:'';
+  position:absolute;
+  top:0;
+  left:20px;
+  width:4px;
+  height:100%;
+  background: var(--timeline-color);
+  border-radius:2px;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom:60px;
+  padding-left:30px;
+  opacity:0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+}
+.timeline-item.visible {
+  opacity:1;
+  transform: translateY(0);
+}
+.timeline-content {
+  background: var(--branco);
+  padding:25px 30px;
+  border-radius:12px;
+  box-shadow:0 0 15px var(--neon-azul),0 0 30px var(--neon-pink);
+  border-left:5px solid var(--neon-pink);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.timeline-content:hover {
+  transform: scale(1.03);
+  box-shadow:0 0 30px var(--neon-pink),0 0 50px var(--neon-azul);
+}
+.timeline-content h2 {
+  font-family: 'Press Start 2P', cursive;
+  font-size:1rem;
+  margin-bottom:10px;
+  color: var(--neon-azul);
+  text-shadow:0 0 2px var(--neon-azul);
+}
+.timeline-content p {
+  font-size:0.8rem;
+  line-height:1.4;
+}
+
+/* FOOTER */
+footer {
+  text-align:center;
+  padding:30px 20px;
+  background: var(--azul-suave);
+  color: var(--azul-retro);
+  font-size:0.75rem;
+  position: relative;
+  z-index:2;
+}
+
+/* ANIMAÇÕES */
+@keyframes neonPulse {
+  from { text-shadow:0 0 5px var(--neon-azul); }
+  to { text-shadow:0 0 20px var(--neon-pink),0 0 40px var(--neon-azul);}
+}
+
+/* RESPONSIVO */
+@media (max-width:768px){
+  header h1{ font-size:1.5rem; }
+  .timeline{ padding-left:20px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<header>
+  <h1>Minha História de Vida</h1>
+</header>
+
+<main>
+  <div class="timeline">
+
+    <div class="timeline-item fade-section">
+      <div class="timeline-content">
+        <h2>Infância</h2>
+        <p>Nasci na cidade de Picos PI, sempre fui uma criança introvertida, mas adorava brincar de pega-pega, pique-esconde e outras brincadeiras divertidas.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-section">
+      <div class="timeline-content">
+        <h2>Adolescência</h2>
+        <p>Durante a adolescência, comecei a me interessar por profissões que me faziam feliz, mas ainda não sabia exatamente qual seguir.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-section">
+      <div class="timeline-content">
+        <h2>Juventude</h2>
+        <p>Atualmente, estou focado em desenvolver habilidades em programação, buscando oportunidades para crescer profissionalmente e pessoalmente.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-section">
+      <div class="timeline-content">
+        <h2>Planos para o Futuro</h2>
+        <p>Meu objetivo é me tornar um desenvolvedor qualificado, contribuir para projetos inovadores e continuar aprendendo para impactar positivamente a sociedade.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 Meu Portfólio Retrô. Todos os direitos reservados.
+</footer>
+
+<script>
+  // Fade ao rolar
+  function onEntry(entries) {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  }
+  const observer = new IntersectionObserver(onEntry,{ threshold:0.3 });
+  document.querySelectorAll('.fade-section').forEach(el => observer.observe(el));
+
+  // PARTICULAS
+  const canvas = document.getElementById("particles");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  let particlesArray = [];
+
+  function initParticles(){
+    particlesArray = [];
+    const num = (canvas.width*canvas.height)/8000;
+    for(let i=0;i<num;i++){
+      const size=Math.random()*2+1;
+      const x=Math.random()*(canvas.width-size*2);
+      const y=Math.random()*(canvas.height-size*2);
+      const speedX=(Math.random()*1-0.5)*0.5;
+      const speedY=(Math.random()*1-0.5)*0.5;
+      particlesArray.push({x,y,size,speedX,speedY});
+    }
+  }
+  function updateParticles(){
+    particlesArray.forEach(p=>{
+      p.x+=p.speedX; p.y+=p.speedY;
+      if(p.x+p.size>canvas.width||p.x-p.size<0)p.speedX*=-1;
+      if(p.y+p.size>canvas.height||p.y-p.size<0)p.speedY*=-1;
+    });
+  }
+  function drawParticles(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particlesArray.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fillStyle="rgba(255,255,255,0.7)";
+      ctx.fill();
+    });
+  }
+  function animateParticles(){
+    updateParticles();
+    drawParticles();
+    requestAnimationFrame(animateParticles);
+  }
+  window.addEventListener("resize",()=>{
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+    initParticles();
+  });
+  initParticles();
+  animateParticles();
+</script>
+
+</body>
+</html>
