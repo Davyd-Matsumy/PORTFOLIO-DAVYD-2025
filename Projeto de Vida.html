@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Projeto de Vida - Onde Estou, Onde Quero Chegar e Como Chegarei Lá">
   <title>Projeto de Vida</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.1/lottie.min.js"></script>
 
@@ -19,18 +20,18 @@
       --neon: #00fff7;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Press Start 2P', monospace;
       background: linear-gradient(135deg, var(--azul-suave), var(--azul-medio));
-      margin: 0;
       padding: 40px 15px;
       color: var(--text-color-dark);
       display: flex;
       flex-direction: column;
       align-items: center;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
     /* PARTICULAS */
@@ -92,8 +93,7 @@
     .area-container:nth-child(2) { animation-delay:0.2s; }
     .area-container:nth-child(3) { animation-delay:0.4s; }
     .area-container:nth-child(4) { animation-delay:0.6s; }
-    .area-container:nth-child(5) { animation-delay:0.8s; }
-    .area-container:nth-child(6) { animation-delay:1s; }
+
     @keyframes popUp {
       to { transform: scale(1); opacity:1; }
     }
@@ -110,8 +110,17 @@
       align-items: center;
       transition: background-color 0.3s ease, transform 0.2s;
       text-shadow: 0 0 5px var(--neon), 0 0 10px var(--neon);
+      border: none;
+      width: 100%;
+      text-align: left;
     }
     .area-header:hover { background-color:#1c3e6e; transform:translateX(5px); }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
     .area-content {
       max-height:0;
@@ -129,7 +138,7 @@
     .arrow { font-size:1.2rem; transition: transform 0.3s ease; color: var(--neon); text-shadow: 0 0 5px var(--neon),0 0 10px var(--neon); }
     .arrow.open { transform:rotate(90deg); }
 
-    .lottie-icon { width:40px; height:40px; margin-right:10px; }
+    .lottie-icon { width:40px; height:40px; }
 
     @media (max-width:600px){
       h1{ font-size:2rem; }
@@ -143,83 +152,58 @@
   <!-- Fundo de partículas -->
   <canvas id="particles"></canvas>
 
-  <h1>Projeto de Vida 📈</h1>
+  <h1>PROJETO DE VIDA 🚀</h1>
 
-  <!-- Áreas do projeto de vida -->
+  <!-- Seções -->
   <div class="area-container">
-    <div class="area-header" onclick="toggleArea(this)">
+    <button class="area-header" onclick="toggleArea(this)">
       <div class="header-content">
-        <div id="lottieEdu" class="lottie-icon"></div>
-        🎓 Educação
+        <div id="lottieNow" class="lottie-icon"></div>
+        📍 ONDE ESTOU
       </div>
       <span class="arrow">▶</span>
-    </div>
+    </button>
     <div class="area-content">
-      <p><strong>Objetivo:</strong> Concluir curso técnico em Desenvolvimento de Software</p>
-      <p><strong>Ações:</strong> Estudar 3h por dia, praticar programação, realizar projetos</p>
+      <p><strong>Atualmente:</strong> Estudando no ensino médio e iniciando curso técnico em Desenvolvimento de Software.</p>
+      <p><strong>Habilidades:</strong> Conhecimento básico em programação, interesse em tecnologia e aprendizado contínuo.</p>
     </div>
   </div>
 
   <div class="area-container">
-    <div class="area-header" onclick="toggleArea(this)">
+    <button class="area-header" onclick="toggleArea(this)">
       <div class="header-content">
-        <div id="lottieCareer" class="lottie-icon"></div>
-        💼 Carreira
+        <div id="lottieFuture" class="lottie-icon"></div>
+        🎯 ONDE QUERO CHEGAR
       </div>
       <span class="arrow">▶</span>
-    </div>
+    </button>
     <div class="area-content">
-      <p><strong>Objetivo:</strong> Conseguir estágio na área de TI</p>
-      <p><strong>Ações:</strong> Atualizar currículo, participar de workshops, enviar candidaturas</p>
+      <p><strong>Meta:</strong> Tornar-me um desenvolvedor de software qualificado e conquistar meu primeiro estágio na área de TI.</p>
+      <p><strong>Sonho:</strong> Trabalhar em uma empresa de tecnologia e, futuramente, atuar em projetos de inovação.</p>
     </div>
   </div>
 
   <div class="area-container">
-    <div class="area-header" onclick="toggleArea(this)">
+    <button class="area-header" onclick="toggleArea(this)">
       <div class="header-content">
-        <div id="lottieHealth" class="lottie-icon"></div>
-        🏃 Saúde
+        <div id="lottiePlan" class="lottie-icon"></div>
+        🛠 COMO CHEGAREI LÁ
       </div>
       <span class="arrow">▶</span>
-    </div>
+    </button>
     <div class="area-content">
-      <p><strong>Objetivo:</strong> Melhorar condicionamento físico</p>
-      <p><strong>Ações:</strong> Fazer exercícios 4x por semana, manter alimentação balanceada</p>
-    </div>
-  </div>
-
-  <div class="area-container">
-    <div class="area-header" onclick="toggleArea(this)">
-      <div class="header-content">
-        <div id="lottieFinance" class="lottie-icon"></div>
-        💰 Financeiro
-      </div>
-      <span class="arrow">▶</span>
-    </div>
-    <div class="area-content">
-      <p><strong>Objetivo:</strong> Economizar para comprar um computador</p>
-      <p><strong>Ações:</strong> Guardar 20% do salário, evitar gastos supérfluos</p>
-    </div>
-  </div>
-
-  <div class="area-container">
-    <div class="area-header" onclick="toggleArea(this)">
-      <div class="header-content">
-        <div id="lottieStudy" class="lottie-icon"></div>
-        📚 Estudos Escolares
-      </div>
-      <span class="arrow">▶</span>
-    </div>
-    <div class="area-content">
-      <p><strong>Objetivo:</strong> Melhorar o desempenho nas disciplinas escolares</p>
-      <p><strong>Ações:</strong> Criar rotina de estudos, revisar conteúdos semanalmente, praticar com simulados e provas antigas, tirar dúvidas com professores, manter cronograma atualizado</p>
+      <p><strong>Passos:</strong></p>
+      <p>- Estudar programação todos os dias e praticar com projetos.</p>
+      <p>- Participar de cursos, workshops e eventos de tecnologia.</p>
+      <p>- Desenvolver portfólio online com meus trabalhos.</p>
+      <p>- Buscar oportunidades de estágio e aprender com a prática.</p>
     </div>
   </div>
 
   <script>
     // ACCORDION
     function toggleArea(header){
-      const content = header.nextElementSibling;
+      const content = header.parentElement.querySelector('.area-content');
       const arrow = header.querySelector('.arrow');
       const isOpen = content.classList.contains("open");
 
@@ -270,7 +254,7 @@
     }
     function connectParticles(){
       for(let a=0;a<particlesArray.length;a++){
-        for(let b=a;b<particlesArray.length;b++){
+        for(let b=a+1;b<particlesArray.length;b++){
           const dx=particlesArray[a].x-particlesArray[b].x;
           const dy=particlesArray[a].y-particlesArray[b].y;
           const dist=Math.sqrt(dx*dx+dy*dy);
@@ -308,11 +292,9 @@
         path:path
       });
     }
-    loadLottie('lottieEdu','https://assets3.lottiefiles.com/packages/lf20_tll0j4bb.json');
-    loadLottie('lottieCareer','https://assets3.lottiefiles.com/packages/lf20_kxsd2ytq.json');
-    loadLottie('lottieHealth','https://assets3.lottiefiles.com/packages/lf20_x62chJ.json');
-    loadLottie('lottieFinance','https://assets3.lottiefiles.com/packages/lf20_mkczw3.json');
-    loadLottie('lottieStudy','https://assets3.lottiefiles.com/packages/lf20_9rtk4t.json');
+    loadLottie('lottieNow','https://assets3.lottiefiles.com/packages/lf20_tll0j4bb.json');
+    loadLottie('lottieFuture','https://assets3.lottiefiles.com/packages/lf20_kxsd2ytq.json');
+    loadLottie('lottiePlan','https://assets3.lottiefiles.com/packages/lf20_x62chJ.json');
   </script>
 
 </body>
