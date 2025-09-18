@@ -5,18 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Davyd Matsumy | Portfólio Futurista</title>
 
-<!-- Fonte retrô/pixelada -->
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 
 <style>
-/* ===== Estilos Gerais ===== */
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Press Start 2P', cursive; /* fonte retrô/pixelada */
+    font-family: 'Press Start 2P', cursive;
     overflow-x: hidden;
     color: #b3f4f1;
-    transition: background-color 3s ease-in-out;
     background-color: #000000;
     animation: fundoPulse 5s infinite alternate;
 }
@@ -41,9 +38,10 @@ canvas#matrixCanvas {
 header.header {
     position: relative;
     z-index: 2;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
     backdrop-filter: blur(8px);
     padding: 10px 20px;
+    box-shadow: 0 0 50px #00fff7, 0 0 100px #ff00ff, 0 0 200px #14ebff;
 }
 
 .header-container {
@@ -54,8 +52,10 @@ header.header {
 
 .logo img {
     height: 50px;
+    filter: drop-shadow(0 0 50px #00fff7) drop-shadow(0 0 100px #ff00ff) drop-shadow(0 0 200px #14ebff);
 }
 
+/* ===== Menu ===== */
 nav.menu-desktop ul {
     list-style: none;
     display: flex;
@@ -65,21 +65,28 @@ nav.menu-desktop ul {
 nav.menu-desktop ul li a {
     text-decoration: none;
     color: #00fff7;
+    text-shadow: 
+        0 0 100px #00fff7,
+        0 0 200px #14ebff,
+        0 0 300px #ff00ff,
+        0 0 400px #14ebff,
+        0 0 500px #00fff7;
+    animation: linkPulse 1.5s infinite alternate;
     transition: all 0.3s;
-    text-shadow: 0 0 5px #00fff7;
-    animation: linkPulse 2s infinite alternate;
 }
 
 nav.menu-desktop ul li a:hover {
     color: #000000;
-    text-shadow: 0 0 15px #000000, 0 0 25px #00fff7, 0 0 35px #14ebff;
+    background: #00fff7;
+    padding: 2px 5px;
+    border-radius: 5px;
+    text-shadow: 0 0 150px #00fff7, 0 0 250px #ff00ff, 0 0 400px #14ebff, 0 0 500px #00fff7;
 }
 
-/* Pulsação neon links */
 @keyframes linkPulse {
-    0% { text-shadow: 0 0 5px #00fff7; }
-    50% { text-shadow: 0 0 15px #00fff7, 0 0 25px #1f0233; }
-    100% { text-shadow: 0 0 5px #00fff7; }
+    0% { text-shadow: 0 0 50px #00fff7, 0 0 100px #14ebff, 0 0 150px #ff00ff; }
+    50% { text-shadow: 0 0 150px #00fff7, 0 0 300px #14ebff, 0 0 400px #ff00ff, 0 0 500px #00fff7; }
+    100% { text-shadow: 0 0 50px #00fff7, 0 0 100px #14ebff, 0 0 150px #ff00ff; }
 }
 
 /* ===== Áreas de conhecimento ===== */
@@ -91,8 +98,19 @@ nav.menu-desktop ul li a:hover {
     text-align: center;
     margin-bottom: 20px;
     color: #00fff7;
-    text-shadow: 0 0 5px #00fff7, 0 0 15px #ff00ff;
+    text-shadow: 
+        0 0 50px #00fff7,
+        0 0 100px #14ebff,
+        0 0 200px #ff00ff,
+        0 0 300px #14ebff,
+        0 0 400px #00fff7;
     animation: areaTitlePulse 2s infinite alternate;
+}
+
+@keyframes areaTitlePulse {
+    0% { text-shadow: 0 0 50px #00fff7, 0 0 100px #14ebff, 0 0 150px #ff00ff; }
+    50% { text-shadow: 0 0 150px #00fff7, 0 0 300px #14ebff, 0 0 400px #ff00ff; }
+    100% { text-shadow: 0 0 50px #00fff7, 0 0 100px #14ebff, 0 0 150px #ff00ff; }
 }
 
 .lista-conhecimento {
@@ -105,21 +123,17 @@ nav.menu-desktop ul li a:hover {
 .lista-conhecimento li {
     margin: 10px 0;
     font-size: 14px;
-    text-shadow: 0 0 3px #00fff7;
+    text-shadow: 
+        0 0 50px #00fff7,
+        0 0 100px #ff00ff,
+        0 0 150px #14ebff;
     animation: areaItemPulse 2s infinite alternate;
 }
 
-/* Pulsação neon áreas */
-@keyframes areaTitlePulse {
-    0% { text-shadow: 0 0 5px #00fff7, 0 0 10px #ff00ff; }
-    50% { text-shadow: 0 0 15px #00fff7, 0 0 25px #ff00ff; }
-    100% { text-shadow: 0 0 5px #00fff7, 0 0 10px #ff00ff; }
-}
-
 @keyframes areaItemPulse {
-    0% { text-shadow: 0 0 2px #00fff7; }
-    50% { text-shadow: 0 0 5px #00fff7, 0 0 10px #ff00ff; }
-    100% { text-shadow: 0 0 2px #00fff7; }
+    0% { text-shadow: 0 0 50px #00fff7; }
+    50% { text-shadow: 0 0 100px #00fff7, 0 0 200px #ff00ff, 0 0 300px #14ebff; }
+    100% { text-shadow: 0 0 50px #00fff7; }
 }
 
 /* ===== Hero ===== */
@@ -139,28 +153,48 @@ nav.menu-desktop ul li a:hover {
 .hero-text h1 {
     font-size: 22px;
     color: #00fff7;
-    text-shadow: 0 0 10px #00fff7, 0 0 20px #ff00ff, 0 0 30px #14ebff;
+    text-shadow: 
+        0 0 100px #00fff7,
+        0 0 200px #14ebff,
+        0 0 300px #ff00ff,
+        0 0 400px #14ebff,
+        0 0 500px #00fff7;
+    animation: neonGlow 1.5s infinite alternate;
 }
 
 .hero-text p {
     font-size: 14px;
     margin-top: 10px;
     color: #b3f4f1;
+    text-shadow: 0 0 50px #00fff7, 0 0 100px #ff00ff;
 }
 
 .hero-image img {
     max-width: 300px;
     border-radius: 15px;
-    box-shadow: 0 0 20px #00fff7, 0 0 40px #ff00ff;
+    box-shadow: 
+        0 0 100px #00fff7,
+        0 0 200px #ff00ff,
+        0 0 300px #14ebff,
+        0 0 400px #ff00ff,
+        0 0 500px #00fff7;
+    animation: imgPulse 2s infinite alternate;
+}
+
+@keyframes imgPulse {
+    0% { box-shadow: 0 0 100px #00fff7, 0 0 200px #ff00ff, 0 0 300px #14ebff; }
+    50% { box-shadow: 0 0 200px #00fff7, 0 0 400px #ff00ff, 0 0 600px #14ebff, 0 0 800px #00fff7; }
+    100% { box-shadow: 0 0 100px #00fff7, 0 0 200px #ff00ff, 0 0 300px #14ebff; }
 }
 
 /* ===== Footer ===== */
 .footer {
     text-align: center;
     padding: 20px;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.7);
     backdrop-filter: blur(8px);
     color: #b3f4f1;
+    box-shadow: 0 0 150px #00fff7, 0 0 300px #ff00ff, 0 0 500px #14ebff;
 }
 
 .footer-links {
@@ -172,31 +206,45 @@ nav.menu-desktop ul li a:hover {
 }
 
 .footer-links a {
-    display: flex;
-    align-items: center;
-    gap: 5px;
     text-decoration: none;
     color: #00fff7;
     font-size: 12px;
-    text-shadow: 0 0 3px #00fff7;
-    animation: footerLinkPulse 2s infinite alternate;
+    text-shadow: 
+        0 0 100px #00fff7,
+        0 0 200px #14ebff,
+        0 0 300px #ff00ff,
+        0 0 400px #14ebff;
+    animation: footerPulse 2s infinite alternate;
 }
 
 .footer-links a img {
     width: 20px;
     height: 20px;
+    filter: drop-shadow(0 0 50px #00fff7) drop-shadow(0 0 100px #ff00ff) drop-shadow(0 0 150px #14ebff);
 }
 
-@keyframes footerLinkPulse {
-    0% { text-shadow: 0 0 3px #00fff7; }
-    50% { text-shadow: 0 0 8px #00fff7, 0 0 15px #ff00ff; }
-    100% { text-shadow: 0 0 3px #00fff7; }
+@keyframes footerPulse {
+    0% { text-shadow: 0 0 100px #00fff7, 0 0 200px #14ebff; }
+    50% { text-shadow: 0 0 200px #00fff7, 0 0 400px #14ebff, 0 0 600px #ff00ff; }
+    100% { text-shadow: 0 0 100px #00fff7, 0 0 200px #14ebff; }
 }
 
-/* ===== Neon digitando ===== */
+/* ===== Neon Digitando ===== */
 .neon-text {
     color: #00fff7;
-    text-shadow: 0 0 5px #00fff7, 0 0 15px #00fff7, 0 0 20px #14ebff;
+    text-shadow: 
+        0 0 200px #00fff7,
+        0 0 400px #14ebff,
+        0 0 600px #ff00ff,
+        0 0 800px #14ebff,
+        0 0 1000px #00fff7;
+    animation: neonGlow 1.5s infinite alternate;
+}
+
+@keyframes neonGlow {
+    0% { text-shadow: 0 0 100px #00fff7, 0 0 200px #14ebff, 0 0 300px #ff00ff; }
+    50% { text-shadow: 0 0 200px #00fff7, 0 0 400px #14ebff, 0 0 600px #ff00ff, 0 0 800px #00fff7; }
+    100% { text-shadow: 0 0 100px #00fff7, 0 0 200px #14ebff, 0 0 300px #ff00ff; }
 }
 </style>
 </head>
@@ -271,66 +319,64 @@ nav.menu-desktop ul li a:hover {
 </footer>
 
 <script>
-    // Efeito de digitação com som
-    const texto = "Bem-vindo ao meu portfólio!";
-    const destino = document.getElementById("digitando");
-    let i = 0;
-    const somDigito = new Audio("https://www.myinstants.com/media/sounds/key.wav");
+const texto = "Bem-vindo ao meu portfólio!";
+const destino = document.getElementById("digitando");
+let i = 0;
+const somDigito = new Audio("https://www.myinstants.com/media/sounds/key.wav");
 
-    function digitar() {
-        if (i < texto.length) {
-            destino.innerHTML += texto.charAt(i);
-            somDigito.currentTime = 0;
-            somDigito.play().catch(() => {});
-            i++;
-            setTimeout(digitar, 100);
-        } else {
-            destino.classList.add("digitado");
-        }
+function digitar() {
+    if (i < texto.length) {
+        destino.innerHTML += texto.charAt(i);
+        somDigito.currentTime = 0;
+        somDigito.play().catch(() => {});
+        i++;
+        setTimeout(digitar, 100);
+    } else {
+        destino.classList.add("digitado");
     }
-    window.addEventListener("load", () => setTimeout(digitar, 1000));
+}
+window.addEventListener("load", () => setTimeout(digitar, 1000));
 
-    // ===== MATRIX DIGITAL RAIN =====
-    const matrixCanvas = document.getElementById('matrixCanvas');
-    const matrixCtx = matrixCanvas.getContext('2d');
-    const font_size = 16;
-    let columns = matrixCanvas.width / font_size;
-    const drops = [];
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:",./<>?`~';
-    const matrixColors = [
-        'rgba(0,255,247,0.7)',
-        'rgba(123,0,255,0.7)',
-        'rgba(20,235,255,0.7)',
-        'rgba(0,255,213,0.7)',
-        'rgba(255,0,255,0.7)'
-    ];
+const matrixCanvas = document.getElementById('matrixCanvas');
+const matrixCtx = matrixCanvas.getContext('2d');
+const font_size = 16;
+let columns = matrixCanvas.width / font_size;
+const drops = [];
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:",./<>?`~';
+const matrixColors = [
+    'rgba(0,255,247,0.9)',
+    'rgba(123,0,255,0.9)',
+    'rgba(20,235,255,0.9)',
+    'rgba(0,255,213,0.9)',
+    'rgba(255,0,255,0.9)'
+];
 
-    function resizeMatrixCanvas() {
-        matrixCanvas.width = window.innerWidth;
-        matrixCanvas.height = window.innerHeight;
-        columns = matrixCanvas.width / font_size;
-        drops.length = 0;
-        for (let x = 0; x < columns; x++) drops[x] = 1;
+function resizeMatrixCanvas() {
+    matrixCanvas.width = window.innerWidth;
+    matrixCanvas.height = window.innerHeight;
+    columns = matrixCanvas.width / font_size;
+    drops.length = 0;
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+}
+
+function drawMatrix() {
+    matrixCtx.fillStyle = 'rgba(0,0,0,0.05)';
+    matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+    matrixCtx.font = font_size + 'px monospace';
+
+    for (let j = 0; j < drops.length; j++) {
+        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+        matrixCtx.fillStyle = matrixColors[j % matrixColors.length];
+        matrixCtx.fillText(text, j * font_size, drops[j] * font_size);
+        if (drops[j] * font_size > matrixCanvas.height && Math.random() > 0.975) drops[j] = 0;
+        drops[j]++;
     }
+    requestAnimationFrame(drawMatrix);
+}
 
-    function drawMatrix() {
-        matrixCtx.fillStyle = 'rgba(0,0,0,0.05)';
-        matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-        matrixCtx.font = font_size + 'px monospace';
-
-        for (let j = 0; j < drops.length; j++) {
-            const text = characters.charAt(Math.floor(Math.random() * characters.length));
-            matrixCtx.fillStyle = matrixColors[j % matrixColors.length];
-            matrixCtx.fillText(text, j * font_size, drops[j] * font_size);
-            if (drops[j] * font_size > matrixCanvas.height && Math.random() > 0.975) drops[j] = 0;
-            drops[j]++;
-        }
-        requestAnimationFrame(drawMatrix);
-    }
-
-    resizeMatrixCanvas();
-    drawMatrix();
-    window.addEventListener('resize', resizeMatrixCanvas);
+resizeMatrixCanvas();
+drawMatrix();
+window.addEventListener('resize', resizeMatrixCanvas);
 </script>
 
 </body>
