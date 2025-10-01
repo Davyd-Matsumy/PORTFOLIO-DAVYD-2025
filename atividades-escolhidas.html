@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Áreas do Conhecimento - Retro Neon</title>
+<!-- Fonte retrô pixelada -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET ===== */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Press Start 2P',monospace;
+  background:#000010;
+  color:#e6f4ff;
+  overflow-x:hidden;
+}
+
+/* ===== ANIMAÇÃO DE FUNDO ===== */
+#bg{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  z-index:-1;
+  background:radial-gradient(circle at 20% 30%,rgba(0,200,255,0.15) 0%,transparent 60%),
+             radial-gradient(circle at 80% 70%,rgba(255,0,200,0.15) 0%,transparent 60%),
+             #000010;
+  animation:shift 12s infinite alternate ease-in-out;
+}
+@keyframes shift{
+  0%{background-position:0 0,100% 100%;}
+  100%{background-position:50% 30%,70% 80%;}
+}
+
+/* ===== HEADER ===== */
+header{
+  text-align:center;
+  padding:30px 10px;
+  background:#000018;
+  border-bottom:2px solid #3399ff66;
+  position:sticky;top:0;z-index:1000;
+}
+header h1{
+  font-size:1.2rem;
+  color:#66ccff;
+  text-shadow:0 0 6px #00faff,0 0 16px #00faff,0 0 32px #3399ff;
+  animation:pulse 2s infinite alternate;
+}
+@keyframes pulse{
+  from{text-shadow:0 0 4px #00faff,0 0 8px #3399ff;}
+  to{text-shadow:0 0 12px #00faff,0 0 28px #66ccff;}
+}
+
+/* ===== SEÇÕES ===== */
+section.area{
+  margin:50px auto;
+  max-width:1200px;
+  background:rgba(255,255,255,0.03);
+  padding:30px;
+  border-radius:12px;
+  box-shadow:0 0 25px rgba(51,153,255,0.2);
+}
+section.area h2{
+  text-align:center;
+  margin-bottom:20px;
+  font-size:0.9rem;
+  color:#66a3ff;
+  text-shadow:0 0 8px #3399ff;
+}
+
+/* ===== EIXOS ===== */
+.eixo{margin-top:30px;}
+.eixo h3{
+  margin-bottom:15px;
+  color:#ff66cc;
+  font-size:0.7rem;
+  text-shadow:0 0 6px #ff3399;
+}
+
+/* ===== CARDS ===== */
+.cards{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+}
+.card{
+  background:#111122;
+  border:1px solid #3399ff33;
+  border-radius:10px;
+  width:220px;
+  text-align:center;
+  overflow:hidden;
+  box-shadow:0 0 15px rgba(0,0,0,0.6);
+  transition:transform 0.3s, box-shadow 0.3s;
+  cursor:pointer;
+}
+.card:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 25px #3399ff55;
+}
+.card img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+}
+.card p{
+  padding:10px;
+  font-size:10px;
+  color:#a5c9ff;
+}
+
+/* ===== LIGHTBOX ===== */
+#lightbox{
+  position:fixed;
+  top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.9);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:2000;
+}
+#lightbox img{
+  max-width:90%;
+  max-height:80%;
+  border-radius:10px;
+  box-shadow:0 0 40px #3399ff;
+  margin-bottom:15px;
+}
+#lightbox .controls{
+  display:flex;
+  gap:15px;
+}
+#lightbox button{
+  font-family:'Press Start 2P',monospace;
+  font-size:10px;
+  background:#3399ff;
+  border:none;
+  border-radius:8px;
+  padding:8px 14px;
+  cursor:pointer;
+  color:#fff;
+  text-shadow:0 0 5px #000;
+}
+#lightbox button:hover{background:#66a3ff;}
+#lightbox.show{display:flex;}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:20px;
+  margin-top:40px;
+  font-size:10px;
+  color:#66a3ff;
+}
+footer a{color:#fff;text-decoration:none;}
+</style>
+</head>
+<body>
+<div id="bg"></div>
+
+<header>
+  <h1>Áreas do Conhecimento e Atividades</h1>
+</header>
+
+<!-- ===== ÁREAS ===== -->
+<section class="area" id="linguagens">
+  <h2>LINGUAGENS</h2>
+  <div class="eixo">
+    <h3>Eixo 1</h3>
+    <div class="cards">
+      <div class="card"><img src="https://picsum.photos/400/300?random=1"><p>Produção de Texto</p></div>
+      <div class="card"><img src="https://picsum.photos/400/300?random=2"><p>Interpretação de Poema</p></div>
+    </div>
+  </div>
+  <div class="eixo">
+    <h3>Eixo 2</h3>
+    <div class="cards">
+      <div class="card"><img src="https://picsum.photos/400/300?random=3"><p>Semana de Arte Moderna</p></div>
+    </div>
+  </div>
+  <div class="eixo">
+    <h3>Eixo 3</h3>
+    <div class="cards">
+      <div class="card"><img src="https://picsum.photos/400/300?random=4"><p>Análise de Gêneros Textuais</p></div>
+    </div>
+  </div>
+  <div class="eixo">
+    <h3>Eixo 4</h3>
+    <div class="cards">
+      <div class="card"><img src="https://picsum.photos/400/300?random=5"><p>Figuras de Linguagem</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="area" id="humanas">
+  <h2>HUMANAS</h2>
+  <div class="eixo"><h3>Eixo 1</h3><div class="cards"><div class="card"><img src="https://picsum.photos/400/300?random=6"><p>Revolução Francesa</p></div></div></div>
+  <div class="eixo"><h3>Eixo 2</h3><div class="cards"><div class="card"><img src="https://picsum.photos/400/300?random=7"><p>Globalização</p></div></div></div>
+  <div class="eixo"><h3>Eixo 3</h3><div class="cards"><div class="card"><img src="https://picsum.photos/400/300?random=8"><p>Direitos Humanos</p></div></div></div>
+  <div class="eixo"><h3>Eixo 4</h3><div class="cards"><div class="card"><img src="https://picsum.photos/400/300?random=9"><p>Conflitos Atuais</p></div></div></div>
+</section>
+
+<section class="area" id="natureza">
+  <h2>NATUREZA</h2>
+  <div class="eixo"><h3>Eixo 1</h3><div class="cards"><div class="card"><img src="https://picsum.photos/400/300?random=10"><p>Magnetismo</p></div></div></div>
+  <div class="eixo"><h3>Eixo 2</h3><div class="cards"><div class="card"><img src="https://picsum.photos/400/300?random=11"><p>Química Orgânica</p></div></div></div>
+  <div class="eixo"><h3>Eixo 3</h3><div class="cards"><div class="card"><img src="https://picsum.photos/400/300?random=12"><p>Radioatividade</p></div></div></div>
+  <div class="eixo"><h3>Eixo 4</h3><div class="cards"><div class="card"><img src="https://picsum.photos/400/300?random=13"><p>Ecologia</p></div></div></div>
+</section>
+
+<section class="area" id="matematica">
+  <h2>MATEMÁTICA</h2>
+  <div class="eixo"><h3>Eixo 1</h3><div class="cards"><div class="card"><img src="https://picsum.photos/400/300?random=14"><p>Funções</p></div></div></div>
+  <div class="eixo"><h3>Eixo 2</h3><div class="cards"><div class="card"><img src="https://picsum.photos/400/300?random=15"><p>Probabilidade</p></div></div></div>
+  <div class="eixo"><h3>Eixo 3</h3><div class="cards"><div class="card"><img src="https://picsum.photos/400/300?random=16"><p>Geometria Espacial</p></div></div></div>
+  <div class="eixo"><h3>Eixo 4</h3><div class="cards"><div class="card"><img src="https://picsum.photos/400/300?random=17"><p>Estatística</p></div></div></div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <img src="" alt="Preview">
+  <div class="controls">
+    <button id="prev">◀</button>
+    <button id="next">▶</button>
+    <button id="close">✖</button>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 Davyd Matsumy | Retro Neon Knowledge</p>
+</footer>
+
+<script>
+// ===== LIGHTBOX =====
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=lightbox.querySelector('img');
+let imgs=Array.from(document.querySelectorAll('.card img'));
+let currentIndex=0;
+
+imgs.forEach((img,i)=>{
+  img.addEventListener('click',()=>{
+    lightbox.classList.add('show');
+    lightboxImg.src=img.src;
+    currentIndex=i;
+  });
+});
+document.getElementById('prev').addEventListener('click',()=>{
+  currentIndex=(currentIndex-1+imgs.length)%imgs.length;
+  lightboxImg.src=imgs[currentIndex].src;
+});
+document.getElementById('next').addEventListener('click',()=>{
+  currentIndex=(currentIndex+1)%imgs.length;
+  lightboxImg.src=imgs[currentIndex].src;
+});
+document.getElementById('close').addEventListener('click',()=>lightbox.classList.remove('show'));
+lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.classList.remove('show');});
+</script>
+</body>
+</html>
